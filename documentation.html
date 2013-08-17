@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>s-CorrPlot by mckennapsean</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>s-CorrPlot</h1>
+        <p>Proof of concept prototype that demonstrates a novel spatial encoding of correlation.</p>
+
+        <p class="view"><a href="https://github.com/mckennapsean/scorrplot">View the Project on GitHub <small>mckennapsean/scorrplot</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/mckennapsean/scorrplot/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/mckennapsean/scorrplot/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/mckennapsean/scorrplot">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+  
+  <h1 id='gyroscope'>Documentation for <em>Gyroscope</em></h1>
+
+<p>An implementation of the <strong>s-CorrPlot</strong>: a new scatterplot for visually exploring pairwise correlation coefficients between all variables in large datasets.</p>
+
+<h2 id='about_gyroscope'>About <em>Gyroscope</em></h2>
+
+<p><em>Gyroscope</em> is an interactive visualization proof of concept for exploring correlation structure in large datasets.</p>
+
+<p>The main component view of this proof of concept is the <strong>s-CorrPlot</strong>, which is a 2D orthogonal projection of the z-scores of each variable in the dataset, represented by a point on the screen. For points lying directly on the unit circle in the scatterplot, the correlation coefficients to all other variables is encoded spatially. For all other points, we get more certain about exact correlation coefficients as they move closer to the outer edge of the circular scatterplot. For further details on the <strong>s-CorrPlot</strong>, please see our companion paper.</p>
+
+<h2 id='main_view'>Main View</h2>
+
+<p>In R, the call <em>gyroscope</em> starts up the tool with the main view of the <strong>s-CorrPlot</strong> and several additional linked views. As we move from left to right, horizontal lines in the <strong>s-CorrPlot</strong> correspond to correlation coefficients of -0.9, -0.8, &#8230;, -0.1, 0, 0.1, &#8230;, 0.9 with respect to point or variable on the right-most location in the scatterplot.</p>
+
+<p>Every point is marked with a text label corresponding to the underlying variable being correlated. Additionally, every variable has a color, which can be activated and deactivated in the bottom color label legend. Bar charts on the left-hand side show the principal component standard deviations for not only the full dataset but also for each colored or labeled dataset as well. Lastly, on the right is a parallel coordinates linked view to show the profile of any single variable or point across all of its observations.</p>
+
+<h2 id='mouse_interactions'>Mouse Interactions</h2>
+
+<p>By moving the mouse over data points, the text labels for each point or variable is listed in order of proximity to the mouse on the right-hand side of the screen. Clicking with the mouse on points in the scatterplot causes a reorientation of the projection plane so that the clicked point becomes the new primary point of interest, i.e. it gets moved to the right-most location on the scatterplot.</p>
+
+<p>Similarly, by clicking on any of the bars in the bar charts causes the projection plane to be reoriented to that specific principal component as the new primary point of interest, aligning it also to the right-most location.</p>
+
+<p>In addition to this primary point of interest, the projection plane can also be reoriented by a secondary point of interest, so long as it is collinear with the primary. To do so with any point or principal component, simply hold down the Control button when clicking on points to select them as a secondary point of interest, thus causing that point to move to the outer edge of the scatterplot. This also guarantees exact spatial encoding of the correlation coefficient for that point of interest as well.</p>
+
+<p>By holding down Shift when clicking on points, they are permanently labeled in the scatterplot, and they are also overlaid on top of the currently hovered over point in the parallel coordinates linked view. This allows for detailed comparison of multiple points or variables.</p>
+
+<p>Clicking on the different colored label legends will highlight or un-highlight that particular set of points in all other views.</p>
+
+<h2 id='keyboard_interactions'>Keyboard Interactions</h2>
+
+<p>The scatterplot can display Pearson&#8217;s correlation (&#8217;p&#8217;) by default, but you can also switch to using Spearman&#8217;s correlation (&#8217;s&#8217;).</p>
+
+<p>Pressing &#8216;b&#8217; toggles between black and white backgrounds.</p>
+
+<p>To remove the selection of highlighting and points in all views, press &#8216;c&#8217;.</p>
+
+<p>The left and right arrows control the transparency of the data points.</p>
+
+<p>The up and down arrows control the size of the data points.</p>
+
+<p>The &#8217;&gt;&#8217; and &#8217;&lt;&#8217; keys broaden and narrow the density estimation effect on the transparency of points, respectively.</p>
+
+<p>Pressing &#8216;a&#8217; toggles off the text labels for the first colored label of variables (to avoid over-plotting).</p>
+
+<h2 id='running_the_proof_of_concept'>Running the Proof of Concept</h2>
+
+<p>To run the proof of concept, <em>Gyroscope</em> expects to receive an R dataframe where each row is a variable to be correlated, i.e. each row will become a point on the scatterplot. Names for each of these points are extracted from the <em>rownames</em> of the dataframe, and coordinate names are extracted through <em>colnames</em>. The last column in the dataframe must be a label to create sets of different colored points, though, for a singular dataset, this can just be all the same text label. For more details, see the example datasets or the randomized data example below.</p>
+
+<p>After <em>Gyroscope</em> is running, there are several commands through R that you can use to interact with the display. Some of these commands allow you to output the top correlated or anti-correlated points in a specific view, highlight certain points in the scatterplot, and also select these points as new primary or secondary points of interest to redefine the projected scatterplot. The details of these commands are provided below.</p>
+
+<h2 id='commands_for_gyroscope_features'>Commands for <em>Gyroscope</em> Features</h2>
+
+<ul>
+<li><p>gyroscope(data, perms = 0, threshold = 0, useDensity = T, showProfile = T, showPatch = F)</p>
+
+<ul>
+<li><p>data: a dataframe with n columns and m rows, with n - 1 variables being correlated &amp; m observations; column n is a textual label assignment</p></li>
+<li><p>perms: number of permutations for a permutation test of any specific view; this test computes the probability that there is a projection with more points with correlation r &gt; a for a &gt;= 0 &amp; r &lt; a for a &lt;= 0, than the current shown projection</p></li>
+<li><p>threshold: ignore data points below a certain absolute threshold are excluded</p></li>
+<li><p>useDensity: determine transparency of points based on a density estimate of the points on the correlation sphere</p></li>
+<li><p>showProfile: display the parallel coordinates linked view</p></li>
+<li><p>showPatch: display each data point as a grayscale patch image</p></li>
+</ul></li>
+<li><p>gyroscopeehighlight.index(indices)</p>
+
+<ul>
+<li><p>indices: highlight the <em>rownames</em> of any specified points</p></li>
+</ul></li>
+<li><p>gyroscope.highlight.name(names)</p>
+
+<ul>
+<li><p>names: highlight points in the <em>Gyroscope</em> display based on their <em>rownames</em></p></li>
+</ul></li>
+<li><p>gyroscope.get.size()</p>
+
+<ul>
+<li>get the number of points in the plot</li>
+</ul></li>
+<li><p>gyroscope.get.selected()</p>
+
+<ul>
+<li>output the list of selected points</li>
+</ul></li>
+<li><p>gyroscope.get.density()</p>
+
+<ul>
+<li>get current density values of all points in the scatterplot</li>
+</ul></li>
+<li><p>gyroscope.get.corr(r)</p>
+
+<ul>
+<li><p>r: retrieve correlated points above some threshold r</p></li>
+</ul></li>
+<li><p>gyroscope.get.acorr(r)</p>
+
+<ul>
+<li><p>r: retrieve correlation points below some threshold -r</p></li>
+</ul></li>
+<li><p>gyroscope.get.cor(n)</p>
+
+<ul>
+<li><p>n: retrieve the top n most correlated points</p></li>
+</ul></li>
+<li><p>gyroscope.get.acor(n)</p>
+
+<ul>
+<li><p>n: retrieve the top n most anti-correlated points</p></li>
+</ul></li>
+<li><p>gyroscope.get.name(indices)</p>
+
+<ul>
+<li>get the <em>rownames</em> of any specified points</li>
+</ul></li>
+<li><p>gyroscope.set.primary(v)</p>
+
+<ul>
+<li><p>v: set the vector v as the primary point of interest</p></li>
+</ul></li>
+<li><p>gyroscope.set.secondary(v)</p>
+
+<ul>
+<li><p>v: set the vector v as the secondary point of interest</p></li>
+</ul></li>
+<li><p>gyroscope.close()</p>
+
+<ul>
+<li>close <em>Gyroscope</em></li>
+</ul></li>
+</ul>
+
+<h2 id='code_example'>Code Example</h2>
+
+<p>This is a code example to create a random dataset and view it in <em>Gyroscope</em>.</p>
+
+<pre><code>library(gyroscope)
+
+######
+# random dataset with 10,000 variables, 10 dimensions
+#######
+
+m &lt;- matrix(runif(10*10000), ncol=10, nrow=10000)
+data &lt;- data.frame(m)
+
+# random labels (last column of dataframe)
+data$labels = as.factor(ceiling( (0.1 + runif(10000)) * 4) )
+levels(data$labels) = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;)
+
+names = c()
+for(i in 1:10000){ names[i] = paste(&quot;name&quot;, i, sep=&quot;-&quot;)}
+rownames(data) = names
+
+
+######
+# run Gyroscope to explore correlation
+######
+
+# start up interactive display
+gyroscope(data)
+
+# get the number of points on the screen
+gyroscope.get.size()
+
+# query current selected data point index
+sel &lt;- gyroscope.get.selected()
+
+# query all points for their density estimation values
+# must have used the density estimation for this command
+dens &lt;- gyroscope.get.density()
+
+# query the positive correlations between 0.95 and 1 to the current projection
+corr &lt;- gyroscope.get.corr(0.95)
+
+# query the negative correlations between -0.95 and -1 to the current projection
+acorr &lt;- gyroscope.get.acorr(0.95)
+
+# query top 100 correlations to the current projection
+cor &lt;- gyroscope.get.cor(100)
+
+# query top 100 correlations to the current projection
+acor &lt;- gyroscope.get.acor(100)
+
+# highlight the first ten points in the dataset
+gyroscope.highlight.index(1:10)
+
+# highlight specific data points
+gyroscope.highlight.name(c(&quot;name-45&quot;, &quot;name-101&quot;))
+
+# make sure to close gyroscope before closing R (also &#39;q&#39; in Gyroscope)
+gyroscope.close()</code></pre>
+
+<h2>
+<a name="contact" class="anchor" href="#contact"><span class="octicon octicon-link"></span></a>Contact</h2>
+
+<p>If you have any difficulties or questions, please contact <a href="mailto:sean@cs.utah.edu">sean@cs.utah.edu</a>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/mckennapsean">mckennapsean</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
