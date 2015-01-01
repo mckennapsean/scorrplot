@@ -1,0 +1,19 @@
+useDynLib("gyroscope")
+
+export(
+  "gyroscope",
+  "gyroscope.highlight.index",
+  "gyroscope.highlight.name",
+  "gyroscope.get.size",
+  "gyroscope.get.selected",
+  "gyroscope.get.density",
+  "gyroscope.get.corr",
+  "gyroscope.get.acorr",
+  "gyroscope.get.cor",
+  "gyroscope.get.acor",
+  "gyroscope.get.name",
+  "gyroscope.set.primary",
+  "gyroscope.set.secondary",
+  "gyroscope.close",
+  "gyroscope.pretty.plot"
+)

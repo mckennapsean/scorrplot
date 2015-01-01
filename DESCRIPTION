@@ -1,0 +1,10 @@
+Package: gyroscope
+Version: 0.9
+Date: 2013-03-25
+Author: Samuel Gerber <sgerber@cs.utah.edu>, Sean McKenna 
+Maintainer: Samuel Gerber <sgerber@cs.utah.edu>
+Description: Correlation visualization
+Title: Gyroscope
+Depends: R (>= 2.10) 
+License: GPL-2
+Repository: CRAN
