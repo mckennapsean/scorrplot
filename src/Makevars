@@ -1,0 +1,11 @@
+SYS = $(shell uname)
+
+ifeq ($(SYS),Darwin)
+  PKG_CPPFLAGS=-I. -I/System/Library/Frameworks/GLUT.framework/Headers  -I/usr/local/include -I/usr/X11R6/include
+  PKG_LIBS= -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names ${LAPACK_LIBS} $(BLAS_LIBS)  -framework AGL -framework OpenGL -framework GLUT -framework Cocoa
+else
+  PKG_CPPFLAGS=-I. -I/usr/local/include -I/usr/X11R6/include
+  PKG_LIBS= -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names ${LAPACK_LIBS} $(BLAS_LIBS)  -lGL -lGLU -lglut
+endif
+
+
