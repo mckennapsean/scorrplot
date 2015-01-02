@@ -355,6 +355,7 @@ class Gyroscope : public Display{
           exit(0);
       }
       sem_post(mutex);
+      glutPostRedisplay();
 #endif
 
       animator.step();
