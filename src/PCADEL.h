@@ -170,28 +170,17 @@ void reshape(int w, int h){
       mod = glutGetModifiers();
       if (state == GLUT_DOWN && selected >= 0){
 	if(button == GLUT_LEFT_BUTTON ){
-	  if(mod == GLUT_ACTIVE_CTRL){
-              /*//subtract current align vector and do PCA
-              DenseMatrix<TPrecision> tmp = Linalg<TPrecision>::Copy(pca->data);
-              for(int i=0; i<tmp.N(); i++){
-                 double dot = Linalg<TPrecision>::DotColumnColumn(tmp, i, data.V, 0);
-                 Linalg<TPrecision>::ColumnAddScale(tmp, i, -dot, data.V, 0);
-              }
-              PCA<TPrecision> pcat(tmp, tmp.M()-1, false);
-              Rtwo.setTarget(pcat.ev, selected);
-              pcat.cleanup();
-              */
-             Rtwo.setTarget(pca->ev, v.N()-1-selected);
-              animator.setAnimation(&Rtwo);
-	  }
-	  else if(mod == GLUT_ACTIVE_SHIFT){
+	  if(mod == GLUT_ACTIVE_SHIFT){
 
 	  }
 	  else{
               Rone.setTarget(pca->ev, v.N()-1-selected);
               animator.setAnimation(&Rone);
 	  }
-	}
+	}else if(button == GLUT_RIGHT_BUTTON){
+    Rtwo.setTarget(pca->ev, v.N()-1-selected);
+    animator.setAnimation(&Rtwo);
+  }
         selected=-1;
       }
     };

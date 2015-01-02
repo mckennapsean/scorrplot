@@ -333,13 +333,7 @@ class DensityProjectionDEL : public DisplayElement{
       int index = data.getSelected();
       if (state == GLUT_DOWN && index >= 0){
         if(button == GLUT_LEFT_BUTTON ){
-          if(mod == GLUT_ACTIVE_CTRL){
-            selectPrevious = select;
-            data.selectedIndex = 0;
-            Rtwo.setTarget(index);
-            animator.setAnimation(&Rtwo);
-          }
-          else if(mod == GLUT_ACTIVE_SHIFT){
+          if(mod == GLUT_ACTIVE_SHIFT){
             data.showRowname.push_back(index);
             data.showProfile.push_back(index);
             glutPostRedisplay();
@@ -350,7 +344,11 @@ class DensityProjectionDEL : public DisplayElement{
             selectPrevious = select;
             data.selectedIndex = 0;
           }
-
+        }else if(button == GLUT_RIGHT_BUTTON){
+          selectPrevious = select;
+          data.selectedIndex = 0;
+          Rtwo.setTarget(index);
+          animator.setAnimation(&Rtwo);
         }
       }
     };
