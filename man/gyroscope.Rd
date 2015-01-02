@@ -48,7 +48,7 @@ on the left hand side.
 
 Since a plane through the origin is fully described through two (non collinear)
 data points an additional point can be selected to lie on the unit circle of the
-projection. This is achieved with ctrl mouse clicks and can be done as for the
+projection. This is achieved with right mouse clicks and can be done as for the
 normal mouse click on data points, bars or the data point name in text list.
 
 With shift click on a data point or a data point name the data point is
