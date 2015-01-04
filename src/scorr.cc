@@ -23,7 +23,7 @@
 #include "Shmscorr.h"
 
 #include "GlutStrokeFont.h"
-#include "scorr.h"
+#include "sCorr.h"
 #include "Data.h"
 #include "DenseVector.h"
 #include "DenseMatrix.h"
@@ -314,7 +314,7 @@ SEXP scorrGetProjection(SEXP Rtype){
 
 
 int mainWindow;
-scorr<double> *D_projection = NULL;
+sCorr<double> *D_projection = NULL;
 
 
 void display1(void){
@@ -487,7 +487,7 @@ SEXP scorr(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
     int argc = 1;
     char *argv = "scorr";
 
-    D_projection = new scorr<double>(font, data);
+    D_projection = new sCorr<double>(font, data);
       
     glutInit(&argc, &argv);
     glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE);

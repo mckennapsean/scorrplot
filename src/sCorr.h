@@ -30,7 +30,7 @@
 bool whiteBackground = false;
 
 template<typename TPrecision>
-class scorr : public Display{
+class sCorr : public Display{
 
   private:
 
@@ -56,7 +56,7 @@ class scorr : public Display{
     // density projection (for grabbing density values)
     DensityProjectionDEL<TPrecision> *dpd;
 
-    scorr(Font &f, Data<TPrecision> &d) : font(f), data(d), Rone(d, Rotation<TPrecision>::Primary),
+    sCorr(Font &f, Data<TPrecision> &d) : font(f), data(d), Rone(d, Rotation<TPrecision>::Primary),
     Rtwo(d, Rotation<TPrecision>::Secondary){ 
       pickH = 5;
       pickW = 5;
