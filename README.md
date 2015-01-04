@@ -20,11 +20,11 @@ For further details, please read the description and derivation of the **s-CorrP
 Code Dependencies
 -----------------
 
-The **s-CorrPlot** has been implemented within a proof of concept prototype: *Gyroscope*. The proof of concept is integrated within the R statistical framework for data input and output. The *Gyroscope* code is written in C++ and OpenGL.
+The **s-CorrPlot** has been implemented within a proof of concept prototype, *scorr*. The proof of concept is integrated within the R statistical framework for data input and output, but the remainder of the code is written in C++ and OpenGL.
 
 The source code has been compiled and tested on both Mac OS X and Linux.
 
-To compile *Gyroscope* through R, the following components must be installed:
+To compile the *scorr* through R, the following components must be installed:
 
 -  **R** ([version 2.10 or newer](http://www.r-project.org/))
 -  **Xcode** (for *Mac*, [install Xcode](https://developer.apple.com/xcode/) and [download command line tools](https://developer.apple.com/support/xcode/))
@@ -42,7 +42,7 @@ Then, simply run the install script as root:
 
     sudo ./install
 
-If it prints out "Done", then *Gyroscope* has installed correctly inside R, as the library *"gyroscope"*.
+If it prints out "Done", then the *s-CorrPlot* has installed correctly inside R, as the library *"scorr"*.
 
 
 
@@ -82,28 +82,28 @@ These scripts can be run from terminal or loaded in R:
 
 Please note that these scripts cannot be run from the R GUI program; they must be executed from the terminal.
 
-For further instructions on how to use *Gyroscope*, please read the [code documentation](http://mckennapsean.github.io/scorrplot/documentation.html).
+For further instructions on how to use the *s-CorrPlot*, please read the [code documentation](http://mckennapsean.github.io/scorrplot/documentation.html).
 
 
 
 Uninstallation
 --------------
 
-Run the uninstall script as root or start R to remove the *Gyroscope* package:
+Run the uninstall script as root or start R to remove the *scorr* package:
 
     sudo ./uninstall
 
 *or*
 
     R
-    remove.packages("gyroscope")
+    remove.packages("scorr")
 
 
 
 License
 -------
 
-This project's codebase *(Gyroscope)* is licensed by GPLv2.
+This project's code is licensed by GPLv2.
 
 
 
@@ -112,7 +112,7 @@ Authors
 
 [Sean McKenna](http://www.seanpmckenna.com/), [Miriah Meyer](http://www.cs.utah.edu/~miriah/), [Christopher Gregg](http://www.neuro.utah.edu/people/faculty/gregg.html), & [Samuel Gerber](http://www.math.duke.edu/~sgerber/)
 
-The *Gyroscope* code was originally designed and developed by [Samuel Gerber](http://www.math.duke.edu/~sgerber/).
+The *s-CorrPlot* package was originally designed and developed by [Samuel Gerber](http://www.math.duke.edu/~sgerber/).
 
 
 

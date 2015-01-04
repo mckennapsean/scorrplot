@@ -1,10 +1,10 @@
  
 
-gyroscope.pretty.plot <- function(data, 
+scorr.pretty.plot <- function(data, 
     colors = brewer.pal("Set1", n=9), 
     alpha=0.5,
-    v1 = gyroscope.get.primary(),
-    v2 = gyroscope.get.secondary(),
+    v1 = scorr.get.primary(),
+    v2 = scorr.get.secondary(),
     bg ="white"
     ){
   

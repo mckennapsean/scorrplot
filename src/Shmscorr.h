@@ -1,6 +1,6 @@
 
-#ifndef SHMGYROSCOPE_H
-#define SHMGYROSCOPE_H
+#ifndef SHMSCORR_H
+#define SHMSCORR_H
 
 #ifndef NULL
 #define NULL 0
@@ -30,9 +30,9 @@ extern "C" {
 
 //mutex for shared memory access
 #define	FILE_MODE (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
-#define SEM_NAME "sem_gyroscope"
-#define SHM_NAME_COR_INDEX "shm_gyroscope_cor_index"
-//#define SHM_NAME_COR_VALUE "shm_gyroscope_cor_value"
+#define SEM_NAME "sem_scorr"
+#define SHM_NAME_COR_INDEX "shm_scorr_cor_index"
+//#define SHM_NAME_COR_VALUE "shm_scorr_cor_value"
 sem_t *mutex;
 
 //status indicator for shared memory

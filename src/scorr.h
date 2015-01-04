@@ -1,5 +1,5 @@
-#ifndef GYROSCOPE_H
-#define GYROSCOPE_H
+#ifndef SCORR_H
+#define SCORR_H
 
 #include "Display.h"
 #include "Data.h"
@@ -30,7 +30,7 @@
 bool whiteBackground = false;
 
 template<typename TPrecision>
-class Gyroscope : public Display{
+class scorr : public Display{
 
   private:
 
@@ -56,7 +56,7 @@ class Gyroscope : public Display{
     // density projection (for grabbing density values)
     DensityProjectionDEL<TPrecision> *dpd;
 
-    Gyroscope(Font &f, Data<TPrecision> &d) : font(f), data(d), Rone(d, Rotation<TPrecision>::Primary),
+    scorr(Font &f, Data<TPrecision> &d) : font(f), data(d), Rone(d, Rotation<TPrecision>::Primary),
     Rtwo(d, Rotation<TPrecision>::Secondary){ 
       pickH = 5;
       pickW = 5;
@@ -65,7 +65,7 @@ class Gyroscope : public Display{
 
 
     std::string title(){
-      return "Gyroscope";
+      return "s-CorrPlot";
     };
 
 
@@ -265,7 +265,7 @@ class Gyroscope : public Display{
 
     void idle(){
       using namespace FortranLinalg;
-#ifdef SHMGYROSCOPE_H
+#ifdef SHMSCORR_H
       sem_wait(mutex);
       bool cor = (*shm_request) == SHM_REQUEST_GET_COR_INDEX; 
       switch( (*shm_request) ){

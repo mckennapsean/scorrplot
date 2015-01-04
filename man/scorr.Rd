@@ -1,13 +1,13 @@
-\name{gyroscope}
-\alias{gyroscope}
-\alias{gyroscope.highlight.index}
-\alias{gyroscope.highlight.name}
-\alias{gyroscope.get.selected}
-\alias{gyroscope.get.cor}
-\alias{gyroscope.get.acor}
-\alias{gyroscope.get.name}
-\alias{gyroscope.close}
-\title{Gyroscope - Orthogonal Projections for Visualizing Correlation}
+\name{scorr}
+\alias{scorr}
+\alias{scorr.highlight.index}
+\alias{scorr.highlight.name}
+\alias{scorr.get.selected}
+\alias{scorr.get.cor}
+\alias{scorr.get.acor}
+\alias{scorr.get.name}
+\alias{scorr.close}
+\title{s-CorrPlot: Orthogonal Projections for Visualizing Correlation}
 \description{
 This package provides an interactive visualization tool to explore correlation
 structures in data sets.
@@ -23,7 +23,7 @@ section.
 
 \bold{Display Description:}
 
-The call \code{gyroscope} starts up a display window with a scatter plot of the
+The call \code{scorr} starts up a display window with a scatter plot of the
 orthogonal projection of the z-scores. The horizontal lines correspond to 0.9,
 0.8, ..., 0.1, 0, -0.1, ..., -0.9 correlation compared to the most left point on
 the unit circle. For each point a label has to be assigned. The boxes on the
@@ -92,50 +92,50 @@ coordinate values (ctr-click in parallel coordinates plot).
 
 \bold{Queries through R console:}
 
-To start up the display call \code{gyroscope}. Gyroscope expects a data frame
+To start up the display call \code{scorr}. s-CorrPlot expects a data frame
 with each row a data point. Names for each data points are extract through the
 \code{rownames} of the data frame and coordinate names through \code{colnames}. The last
 column needs to be a factor which indicates for each data point to which labels
 it belongs and the names of the labels correspond to the levels of that factor.
 For details see the setup of the data frame in the example section. 
 
-Once gyroscope is started there are several commands to interact with the display
+Once the s-CorrPlot is started there are several commands to interact with the display
 through the R console. 
 
 To retrieve the currently n top correlation or anti-correlated points (i.e. left
-most and right most points, respectively).  call \code{gyrocsope.get.cor(n)} or
-\code{gyroscope.get.acor(n)} which will return a data frame with n rows with the
-first column the index of the data point into the data frame passed to gyroscope,
+most and right most points, respectively).  call \code{scorr.get.cor(n)} or
+\code{scorr.get.acor(n)} which will return a data frame with n rows with the
+first column the index of the data point into the data frame passed to the s-CorrPlot,
 the second row the correlation coefficients to vector corresponding to the left
 most point of the unit circle and the last row the name of the data point.
 
 To highlight a set of genes pass a list of indices (into the data frame) of the
-data points to highlight through \code{gyroscope.highlight.index} or a list of
-names through \code{gyroscpe.highlight.name}
+data points to highlight through \code{scorr.highlight.index} or a list of
+names through \code{scorr.highlight.name}
 
 To set primary or secondary projection projection directy pass a vector of
 lenngth equal the number of observation for each data point to
-\code{gyroscope.set.primary} or \code{gyroscope.set.secondary}, respectively.
+\code{scorr.set.primary} or \code{scorr.set.secondary}, respectively.
 
 }
 
 
 \usage{
-  gyroscope(data, perms = 0, threshold = 0, coloring = 1:nrows(data), useDensity
+  scorr(data, perms = 0, threshold = 0, coloring = 1:nrows(data), useDensity
       = T, showProfile = T, showPatch = F)
-  gyroscopeehighlight.index(indices)
-  gyroscope.highlight.name(names)
-  gyroscope.get.size()
-  gyroscope.get.selected()
-  gyroscope.get.density()
-  gyroscope.get.corr(r)
-  gyroscope.get.acorr(r)
-  gyroscope.get.cor(n)
-  gyroscope.get.acor(n)
-  gyroscope.get.name(indices)
-  gyroscope.set.primary(v),
-  gyroscope.set.secondary(v),
-  gyroscope.close()
+  scorrehighlight.index(indices)
+  scorr.highlight.name(names)
+  scorr.get.size()
+  scorr.get.selected()
+  scorr.get.density()
+  scorr.get.corr(r)
+  scorr.get.acorr(r)
+  scorr.get.cor(n)
+  scorr.get.acor(n)
+  scorr.get.name(indices)
+  scorr.set.primary(v),
+  scorr.set.secondary(v),
+  scorr.close()
 }
 
 \arguments{
@@ -149,9 +149,9 @@ permutation test computes the probability that there is a projection with more
 points with correlation r>a for a>=0 and r<a for a<=0 than the current shown
 projection.}
   \item{n}{Number of top anti-/correlations to retrieve}
-  \item{indices}{Data point indices to retrieve names for or to highlight in the gyroscope
+  \item{indices}{Data point indices to retrieve names for or to highlight in the s-CorrPlot
 display} 
-  \item{names}{Data point names to highlight in the gyroscope display}
+  \item{names}{Data point names to highlight in the s-CorrPlot display}
   \item{threshold}{Data points with varance below threhold are excluded}
   \item{coloring}{Alternate continuous values for rach data  point for coloring
     the data instead of lables (swicth by pressing c)}
@@ -175,7 +175,7 @@ first projection direction (left most point of the unit circle in the display).
 In preparation
 }
 \examples{
-library(gyroscope)
+library(scorr)
 
 ####
 #Create uniform random data sets with 10 dimensions and 10000 points
@@ -196,45 +196,45 @@ rownames(data) = names;
 
 
 ####
-#use gyroscope to explore data
+#use the s-CorrPlot to explore data
 ####
 
 #start up interactive display
-gyroscope(data)
+scorr(data)
 
 #get the number of points on the screen
-gyroscope.get.size()
+scorr.get.size()
 
 #query current selected data point index
-sel <- gyroscope.get.selected()
+sel <- scorr.get.selected()
 
 #query all points for their density estimation values
 #must have used the density estimation for this command
-dens <- gyroscope.get.density()
+dens <- scorr.get.density()
 
 #query the positive correlations between 0.95 and 1 to the current projection
-corr <- gyroscope.get.corr(0.95)
+corr <- scorr.get.corr(0.95)
 
 #query the negative correlations between -0.95 and -1 to the current projection
-acorr <- gyroscope.get.acorr(0.95)
+acorr <- scorr.get.acorr(0.95)
 
 #query top 100 correlations to the current projection
-cor <- gyroscope.get.cor(100)
+cor <- scorr.get.cor(100)
 
 #query top 100 correlations to the current projection
-acor <- gyroscope.get.acor(100)
+acor <- scorr.get.acor(100)
 
 
 #highlight points 1 through 10
-gyroscope.highlight.index(1:10);
+scorr.highlight.index(1:10);
 
 #highlight by names
-gyroscope.highlight.name(c("name-45", "name-101"))
+scorr.highlight.name(c("name-45", "name-101"))
 
-#make sure to close gyroscope before closing R
-#( you can also close the display by pressing 'q' in the gyroscope
+#make sure to close the s-CorrPlot before closing R
+#( you can also close the display by pressing 'q' in the s-CorrPlot
 #  display )
-gyroscope.close();
+scorr.close();
 
 
 }

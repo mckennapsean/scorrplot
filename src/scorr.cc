@@ -19,11 +19,11 @@
 
 
 
-//needs to be included before other Gyroscope stuff
-#include "ShmGyroscope.h"
+//needs to be included before other scorr stuff
+#include "Shmscorr.h"
 
 #include "GlutStrokeFont.h"
-#include "Gyroscope.h"
+#include "scorr.h"
 #include "Data.h"
 #include "DenseVector.h"
 #include "DenseMatrix.h"
@@ -35,10 +35,10 @@ extern "C" {
 int m;
 
 
-//shm message passing R <-> Gyroscope
+//shm message passing R <-> scorr
 
 
-SEXP gyroscopeHighlightIndex(SEXP Rindices, SEXP Rn){
+SEXP scorrHighlightIndex(SEXP Rindices, SEXP Rn){
   int *indices = INTEGER(Rindices);
   int n = *INTEGER(Rn);
 
@@ -57,7 +57,7 @@ SEXP gyroscopeHighlightIndex(SEXP Rindices, SEXP Rn){
 };
 
 
-SEXP gyroscopeHighlightName(SEXP Rnames, SEXP Rn){
+SEXP scorrHighlightName(SEXP Rnames, SEXP Rn){
   int n = *INTEGER(Rn);
 
   for(int i=0; i<n; i++){
@@ -78,7 +78,7 @@ SEXP gyroscopeHighlightName(SEXP Rnames, SEXP Rn){
 
 
 
-SEXP gyroscopeGetSize(){
+SEXP scorrGetSize(){
    
    sem_wait(mutex);
    *shm_request = SHM_REQUEST_GET_SIZE;
@@ -99,7 +99,7 @@ SEXP gyroscopeGetSize(){
 
 
 
-SEXP gyroscopeGetSelected(){
+SEXP scorrGetSelected(){
 
    sem_wait(mutex);
    *shm_request = SHM_REQUEST_GET_INDEX;
@@ -117,7 +117,7 @@ SEXP gyroscopeGetSelected(){
 };
 
 
-SEXP gyroscopeClose(){
+SEXP scorrClose(){
 
    sem_wait(mutex);
    *shm_request = SHM_REQUEST_CLOSE;
@@ -130,7 +130,7 @@ SEXP gyroscopeClose(){
 };
 
 
-SEXP gyroscopeGetCorIndex(SEXP Rn){
+SEXP scorrGetCorIndex(SEXP Rn){
 
    int n = *INTEGER(Rn);
    bool top = n>0;
@@ -168,7 +168,7 @@ SEXP gyroscopeGetCorIndex(SEXP Rn){
 
 
 
-SEXP gyroscopeGetName(SEXP Rindices, SEXP Rn){
+SEXP scorrGetName(SEXP Rindices, SEXP Rn){
   int *indices = INTEGER(Rindices);
   int n = *INTEGER(Rn);
 
@@ -195,7 +195,7 @@ SEXP gyroscopeGetName(SEXP Rindices, SEXP Rn){
 
 
 
-SEXP gyroscopeGetDensity(SEXP Rindices, SEXP Rn){
+SEXP scorrGetDensity(SEXP Rindices, SEXP Rn){
   int *indices = INTEGER(Rindices);
   int n = *INTEGER(Rn);
 
@@ -222,7 +222,7 @@ SEXP gyroscopeGetDensity(SEXP Rindices, SEXP Rn){
 
 
 
-SEXP gyroscopeGetCorValue(SEXP Rindices, SEXP Rn){
+SEXP scorrGetCorValue(SEXP Rindices, SEXP Rn){
   int *indices = INTEGER(Rindices);
   int n = *INTEGER(Rn);
 
@@ -247,7 +247,7 @@ SEXP gyroscopeGetCorValue(SEXP Rindices, SEXP Rn){
 };
 
 
-SEXP gyroscopeSetProjection(SEXP Rv, SEXP Rmv, SEXP Rtype){
+SEXP scorrSetProjection(SEXP Rv, SEXP Rmv, SEXP Rtype){
   double *v = REAL(Rv);
   int type = *INTEGER(Rtype);
   int mv = *INTEGER(Rmv); 
@@ -279,7 +279,7 @@ SEXP gyroscopeSetProjection(SEXP Rv, SEXP Rmv, SEXP Rtype){
 
 
 
-SEXP gyroscopeGetProjection(SEXP Rtype){
+SEXP scorrGetProjection(SEXP Rtype){
   int type = *INTEGER(Rtype);
 
 
@@ -306,7 +306,7 @@ SEXP gyroscopeGetProjection(SEXP Rtype){
 
   return Rv;
 };
-//rendering gyroscope methods
+//rendering scorr methods
 
 
 //#define MAKE_STRING_(x) #x
@@ -314,7 +314,7 @@ SEXP gyroscopeGetProjection(SEXP Rtype){
 
 
 int mainWindow;
-Gyroscope<double> *D_projection = NULL;
+scorr<double> *D_projection = NULL;
 
 
 void display1(void){
@@ -374,7 +374,7 @@ void printHelp(){
 }
 
 
-SEXP gyroscope(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
+SEXP scorr(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
     Rcolors, SEXP RuseDensity, SEXP RshowProfile, SEXP RshowPatch) {
       using namespace FortranLinalg;
   m = *INTEGER(Rm);
@@ -437,7 +437,7 @@ SEXP gyroscope(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
     std::cout << "sem_unlink failed: " << errno << std::endl;
   }
    
-  //create gyroscope process 
+  //create scorr process 
   pid_t pID = fork();
   if(pID == 0){//child
 
@@ -485,9 +485,9 @@ SEXP gyroscope(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
     data.setColoring(colors);
 
     int argc = 1;
-    char *argv = "gyroscope";
+    char *argv = "scorr";
 
-    D_projection = new Gyroscope<double>(font, data);
+    D_projection = new scorr<double>(font, data);
       
     glutInit(&argc, &argv);
     glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE);

@@ -1,2 +1,2 @@
 data(image)
-data = gyroscope(data, showPatch=T)
+data = scorr(data, showPatch=T)

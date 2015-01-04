@@ -1,2 +1,2 @@
 data(subway)
-data = gyroscope(data, useDensity=F)
+data = scorr(data, useDensity=F)

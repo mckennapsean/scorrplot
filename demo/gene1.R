@@ -1,2 +1,2 @@
 data(gene1)
-data<-gyroscope(data, useDensity=T)
+data<-scorr(data, useDensity=T)

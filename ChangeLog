@@ -1,32 +1,32 @@
-##gyroscope version 0.9 - S. Gerber - March, 25 2012 ##
+##scorr version 0.9 - S. Gerber - March, 25 2012 ##
 - Removed unit calculation so it will work with large dimensional data
 
-##gyroscope version 0.8 - S. McKenna - February, 25 2012 ##
+##scorr version 0.8 - S. McKenna - February, 25 2012 ##
 - add functions for getting correlation and density values
 
-##gyroscope version 0.7 - S. Gerber - November, 21, 2012 ##
+##scorr version 0.7 - S. Gerber - November, 21, 2012 ##
 - added density estimate for projection plot and more options fro starting up
-gyroscope
+scorr
 - Fixed Makevars to work for Linux and Mac
 
-##gyroscope version 0.6 - S. McKenna - September. 10. 2012 ##
+##scorr version 0.6 - S. McKenna - September. 10. 2012 ##
 - Simple rescaling of window
 - Add features to change background color and toggle all labels off / on
 
-##gyroscope version 0.5 - S. Gerber - August. 21. 2012 ##
+##scorr version 0.5 - S. Gerber - August. 21. 2012 ##
 - Added simple pretty plot function
 - Changed picking in projection plot 
 
-##gyroscope version 0.4 - S. Gerber - August. 15. 2012 ##
+##scorr version 0.4 - S. Gerber - August. 15. 2012 ##
 - Added startup check for zero variance columns
 
-##gyroscope version 0.3 - S. Gerber - May. 15. 2012 ##
-- Gyroscope runs in parallel to R. Communication via shared memory. 
+##scorr version 0.3 - S. Gerber - May. 15. 2012 ##
+- scorr runs in parallel to R. Communication via shared memory. 
 - Added man pages.
 
-##gyroscope version 0.2 - S. Gerber - May. 15. 2012 ##
+##scorr version 0.2 - S. Gerber - May. 15. 2012 ##
 - Added various functionalities
 
-##gyroscope version 0.1 - S. Gerber - April. 15. 2012 ##
+##scorr version 0.1 - S. Gerber - April. 15. 2012 ##
 - Inital package
 
