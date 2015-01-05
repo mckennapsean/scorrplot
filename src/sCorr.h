@@ -27,7 +27,7 @@
 
 #include "Font.h"
 
-bool whiteBackground = false;
+bool whiteBackground = true;
 
 template<typename TPrecision>
 class sCorr : public Display{
