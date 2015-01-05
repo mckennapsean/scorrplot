@@ -485,7 +485,8 @@ SEXP scorr(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
     data.setColoring(colors);
 
     int argc = 1;
-    char *argv = "scorr";
+    char name[] = "scorr";
+    char *argv = name;
 
     D_projection = new sCorr<double>(font, data);
       
