@@ -56,7 +56,7 @@ class sCorr : public Display{
     // density projection (for grabbing density values)
     DensityProjectionDEL<TPrecision> *dpd;
 
-    sCorr(Font &f, Data<TPrecision> &d) : font(f), data(d), Rone(d, Rotation<TPrecision>::Primary),
+    sCorr(Data<TPrecision> &d, Font &f) : data(d), font(f), Rone(d, Rotation<TPrecision>::Primary),
     Rtwo(d, Rotation<TPrecision>::Secondary){ 
       pickH = 5;
       pickW = 5;
@@ -139,7 +139,7 @@ class sCorr : public Display{
         elements.push_back(pr);
       }
 
-      TextDEL<TPrecision> *tx=new TextDEL<TPrecision>(data, animator, font);
+      TextDEL<TPrecision> *tx=new TextDEL<TPrecision>(data, font, animator);
       tx->location(790, 210, 230, 770);
       elements.push_back(tx);
 
@@ -150,7 +150,7 @@ class sCorr : public Display{
        */
 
       
-      LabelsDEL<TPrecision> *la=new LabelsDEL<TPrecision>(data, animator, font);
+      LabelsDEL<TPrecision> *la=new LabelsDEL<TPrecision>(data, font, animator);
       la->location(151, 650, 630, 40);
       elements.push_back(la);
 

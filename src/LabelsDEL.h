@@ -32,8 +32,8 @@ class LabelsDEL : public DisplayElement{
 
   public:
 
-    LabelsDEL(Data<TPrecision> &d, Animator &a, Font &f) 
-           : data(d), animator(a), font(f){ 
+    LabelsDEL(Data<TPrecision> &d, Font &f, Animator &a) 
+           : data(d), font(f), animator(a){ 
        selected=-1;
     };
 

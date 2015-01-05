@@ -488,7 +488,7 @@ SEXP scorr(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
     char name[] = "scorr";
     char *argv = name;
 
-    D_projection = new sCorr<double>(font, data);
+    D_projection = new sCorr<double>(data, font);
       
     glutInit(&argc, &argv);
     glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE);

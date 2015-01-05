@@ -42,8 +42,8 @@ class TextDEL : public DisplayElement{
 
   public:
 
-    TextDEL(Data<TPrecision> &d, Animator &a, Font &f) 
-           : data(d), animator(a), font(f), Rone(d,
+    TextDEL(Data<TPrecision> &d, Font &f, Animator &a) 
+           : data(d), font(f), animator(a), Rone(d,
 Rotation<TPrecision>::Primary), Rtwo(d,Rotation<TPrecision>::Secondary){ 
        pickW=5;
        pickH=5;
