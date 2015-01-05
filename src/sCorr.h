@@ -74,7 +74,7 @@ class sCorr : public Display{
       width = w;
       height = h;
 
-      int size = std::min(w, h)/2 - 5;
+      // int size = std::min(w, h)/2 - 5;
       glViewport(0, 0, w, h);       
       glMatrixMode(GL_PROJECTION);  
       glLoadIdentity();

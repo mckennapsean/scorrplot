@@ -63,8 +63,8 @@ class LabelsDEL : public DisplayElement{
       int fs = 12;
       int x = xLeft+10;
       int y = yTop+10+fs;
-      int rIndex = data.getSelected();
-      float col[4];
+      // int rIndex = data.getSelected();
+      // float col[4];
       
       glPushName(-1); 
 

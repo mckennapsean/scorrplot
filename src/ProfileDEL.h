@@ -149,7 +149,7 @@ Rotation<TPrecision>::Primary), Rtwo(d, Rotation<TPrecision>::Secondary), animat
 
        TPrecision xMin = Linalg<TPrecision>::MinColumn(data.raw, index);
        TPrecision xMax = Linalg<TPrecision>::MaxColumn(data.raw, index);
-       TPrecision xD = xMax-xMin;
+       // TPrecision xD = xMax-xMin;
 
        glColor4f(0.5, 0.5, 0.5, 1);
        font.setSize(9);
