@@ -78,7 +78,7 @@ void createShmCorIndex(int n){
     std::cout << "mmap index failed: " << errno << std::endl;
   }
   close(fd);
-};
+}
 
 void closeShmCorIndex(int n){
   int res = munmap(shm_cor_indices, sizeof(int)*n);
@@ -86,7 +86,7 @@ void closeShmCorIndex(int n){
     std::cout << "munmap failed: " << errno << std::endl;
   }
   remove(SHM_NAME_COR_INDEX); 
-};
+}
 
 
 

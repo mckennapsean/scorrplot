@@ -54,7 +54,7 @@ SEXP scorrHighlightIndex(SEXP Rindices, SEXP Rn){
   }
   
   return R_NilValue;
-};
+}
 
 
 SEXP scorrHighlightName(SEXP Rnames, SEXP Rn){
@@ -73,7 +73,7 @@ SEXP scorrHighlightName(SEXP Rnames, SEXP Rn){
   }
   
   return R_NilValue;
-};
+}
 
 
 
@@ -94,7 +94,7 @@ SEXP scorrGetSize(){
    UNPROTECT(1);
    
    return Rsize;
-};
+}
 
 
 
@@ -114,7 +114,7 @@ SEXP scorrGetSelected(){
    *INTEGER(Rindex) = *shm_index + 1;
    UNPROTECT(1);
    return Rindex;
-};
+}
 
 
 SEXP scorrClose(){
@@ -127,7 +127,7 @@ SEXP scorrClose(){
      usleep(10);
    }
    return R_NilValue;
-};
+}
 
 
 SEXP scorrGetCorIndex(SEXP Rn){
@@ -161,7 +161,7 @@ SEXP scorrGetCorIndex(SEXP Rn){
 
    closeShmCorIndex(n);
    return Rindices;
-};
+}
 
 
 
@@ -190,7 +190,7 @@ SEXP scorrGetName(SEXP Rindices, SEXP Rn){
   UNPROTECT(1);
   
   return list;
-};
+}
 
 
 
@@ -217,7 +217,7 @@ SEXP scorrGetDensity(SEXP Rindices, SEXP Rn){
   UNPROTECT(1);
   
   return list;
-};
+}
 
 
 
@@ -244,7 +244,7 @@ SEXP scorrGetCorValue(SEXP Rindices, SEXP Rn){
   UNPROTECT(1);
   
   return list;
-};
+}
 
 
 SEXP scorrSetProjection(SEXP Rv, SEXP Rmv, SEXP Rtype){
@@ -275,7 +275,7 @@ SEXP scorrSetProjection(SEXP Rv, SEXP Rmv, SEXP Rtype){
 
 
   return R_NilValue;
-};
+}
 
 
 
@@ -305,7 +305,7 @@ SEXP scorrGetProjection(SEXP Rtype){
   UNPROTECT(1);
 
   return Rv;
-};
+}
 //rendering scorr methods
 
 
@@ -319,11 +319,11 @@ sCorr<double> *D_projection = NULL;
 
 void display1(void){
   D_projection->display();
-};
+}
 
 void idle1(void){
   D_projection->idle();
-};
+}
 
 void mouse1(int button, int state, int x, int y){
   D_projection->mouse(button, state, x, y);
@@ -515,7 +515,7 @@ SEXP scorr(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
   }
 
   return R_NilValue;
-};
+}
 
 
 }//end extern C
