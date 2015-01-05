@@ -94,6 +94,6 @@ class DenseMatrix : public Matrix<TPrecision>{
 
 };
 
-};
+}
 
 #endif

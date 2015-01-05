@@ -140,8 +140,8 @@ extern "C"{
                     float *ABSTOL, int *M, float *W, float *Z, int *LDZ, 
                     int *ISUPPZ, float *WORK, int *LWORK, int *IWORK, 
                     int *LIWORK, int *INFO );
-}; 
+}
 
-};
+}
 
 #endif
