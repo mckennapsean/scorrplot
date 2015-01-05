@@ -1,32 +1,38 @@
-##scorr version 0.9 - S. Gerber - March, 25 2012 ##
-- Removed unit calculation so it will work with large dimensional data
+##scorr version 1.0 - S. McKenna - January 5, 2015 ##
+- Refactor package to comply with building from devtools
+- Add both data and demos from the companion paper
+- Combine previous static plotting functions into one
+- Update documentation and man pages
 
-##scorr version 0.8 - S. McKenna - February, 25 2012 ##
-- add functions for getting correlation and density values
+##scorr version 0.9 - S. Gerber - March 25, 2013 ##
+- Remove unit calculation so it will work with large dimensional data
 
-##scorr version 0.7 - S. Gerber - November, 21, 2012 ##
-- added density estimate for projection plot and more options fro starting up
+##scorr version 0.8 - S. McKenna - February 25, 2013 ##
+- Add functions for getting correlation and density values
+
+##scorr version 0.7 - S. Gerber - November 21, 2012 ##
+- Add density estimation for projection plot and more options for starting up
 scorr
-- Fixed Makevars to work for Linux and Mac
+- Fix Makevars to work for Linux and Mac
 
-##scorr version 0.6 - S. McKenna - September. 10. 2012 ##
+##scorr version 0.6 - S. McKenna - September 10, 2012 ##
 - Simple rescaling of window
 - Add features to change background color and toggle all labels off / on
 
-##scorr version 0.5 - S. Gerber - August. 21. 2012 ##
-- Added simple pretty plot function
-- Changed picking in projection plot 
+##scorr version 0.5 - S. Gerber - August 21, 2012 ##
+- Add simple pretty plot function
+- Change picking in projection plot 
 
-##scorr version 0.4 - S. Gerber - August. 15. 2012 ##
-- Added startup check for zero variance columns
+##scorr version 0.4 - S. Gerber - August 15, 2012 ##
+- Add startup check for zero variance columns
 
-##scorr version 0.3 - S. Gerber - May. 15. 2012 ##
-- scorr runs in parallel to R. Communication via shared memory. 
-- Added man pages.
+##scorr version 0.3 - S. Gerber - May 15, 2012 ##
+- Tool runs in parallel to R; communication via shared memory
+- Add man pages
 
-##scorr version 0.2 - S. Gerber - May. 15. 2012 ##
-- Added various functionalities
+##scorr version 0.2 - S. Gerber - May 15, 2012 ##
+- Add various functionalities
 
-##scorr version 0.1 - S. Gerber - April. 15. 2012 ##
-- Inital package
+##scorr version 0.1 - S. Gerber - April 15, 2012 ##
+- Initial package
 
