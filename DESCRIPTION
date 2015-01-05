@@ -1,10 +1,20 @@
 Package: scorr
-Version: 0.9
-Date: 2013-03-25
-Author: Samuel Gerber <sgerber@cs.utah.edu>, Sean McKenna 
-Maintainer: Samuel Gerber <sgerber@cs.utah.edu>
-Description: Correlation visualization
-Title: s-CorrPlot
-Depends: R (>= 2.10) 
+Title: s-CorrPlot: Visualizing Correlation
+Version: 1.0
+Authors@R: as.person(c(
+    "Sean McKenna <sean@cs.utah.edu> [cre, ctb]",
+    "Samuel Gerber <sgerber@cs.utah.edu> [cre, aut]"
+    ))
+Description: The s-CorrPlot is a scatterplot for visually exploring pairwise
+    correlation coefficients between variables in large datasets. Variables are
+    projected as points on a scatterplot with respect to some user-selected
+    variables of interest, driven by a geometric interpretation of correlation.
+    The correlation of all other variables to the selected one is indicated by
+    vertical gridlines in the plot. By selecting new variables of interest, a
+    user can create simple tours of the correlation space through animations
+    between different projections of the data.
+Depends: R (>= 2.10)
 License: GPL-2
-Repository: CRAN
+SystemRequirements: Mac/Linux, C++, OpenGL/GLUT
+URL: http://mckennapsean.com/scorrplot/
+BugReports: https://github.com/mckennapsean/scorrplot/issues
