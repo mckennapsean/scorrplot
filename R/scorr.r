@@ -1,8 +1,7 @@
 
 
 
-scorr <- function (data, perms = 0, threshold = 0, coloring = 1:nrow(data),
-    useDensity = T, showProfile = T, showPatch = F ){
+scorr <- function (data, useDensity = T, showProfile = T, showPatch = F, threshold = 0, coloring = 1 : nrow(data), perms = 0){
 
   nc <- ncol(data)  
 
@@ -28,18 +27,23 @@ scorr <- function (data, perms = 0, threshold = 0, coloring = 1:nrow(data),
    invisible(data)
 }
 
-scorr.close <-  function(){
- .Call("scorrClose")
+
+
+scorr.set.primary <- function(v){
+  .Call("scorrSetProjection", as.double(v), as.integer(length(v)), as.integer(0) )
 }
 
-scorr.highlight.index <- function(indices){
-  .Call("scorrHighlightIndex", as.integer(indices),
-as.integer(length(indices)) )
+scorr.set.secondary <- function(v){
+  .Call("scorrSetProjection", as.double(v), as.integer(length(v)),
+as.integer(1) )
 }
 
-scorr.highlight.name <- function(names){
-  .Call("scorrHighlightName", as.character(names),
-as.integer(length(names)) )
+scorr.get.primary <- function(v){
+  .Call("scorrGetProjection", as.integer(0) )
+}
+
+scorr.get.secondary <- function(v){
+  .Call("scorrGetProjection", as.integer(1) )
 }
 
 scorr.get.size <- function(){
@@ -95,25 +99,16 @@ scorr.get.name <- function(indices){
   .Call("scorrGetName", as.integer(indices), as.integer(length(indices)) );
 }
 
-
-scorr.set.primary <- function(v){
-  .Call("scorrSetProjection", as.double(v), as.integer(length(v)), as.integer(0) )
+scorr.highlight.index <- function(indices){
+  .Call("scorrHighlightIndex", as.integer(indices),
+as.integer(length(indices)) )
 }
 
-
-scorr.set.secondary <- function(v){
-  .Call("scorrSetProjection", as.double(v), as.integer(length(v)),
-as.integer(1) )
+scorr.highlight.name <- function(names){
+  .Call("scorrHighlightName", as.character(names),
+as.integer(length(names)) )
 }
 
-
-
-scorr.get.primary <- function(v){
-  .Call("scorrGetProjection", as.integer(0) )
+scorr.close <-  function(){
+ .Call("scorrClose")
 }
-
-
-scorr.get.secondary <- function(v){
-  .Call("scorrGetProjection", as.integer(1) )
-}
-

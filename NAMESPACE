@@ -2,8 +2,10 @@ useDynLib("scorr")
 
 export(
   "scorr",
-  "scorr.highlight.index",
-  "scorr.highlight.name",
+  "scorr.set.primary",
+  "scorr.set.secondary",
+  "scorr.get.primary",
+  "scorr.get.secondary",
   "scorr.get.size",
   "scorr.get.selected",
   "scorr.get.density",
@@ -12,8 +14,8 @@ export(
   "scorr.get.cor",
   "scorr.get.acor",
   "scorr.get.name",
-  "scorr.set.primary",
-  "scorr.set.secondary",
+  "scorr.highlight.index",
+  "scorr.highlight.name",
   "scorr.close",
   "scorr.plot"
 )
