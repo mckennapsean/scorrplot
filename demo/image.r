@@ -1,2 +1,2 @@
 data(image)
-data = scorr(data, showPatch=T)
+data = scorr(data, showPatch = T)
