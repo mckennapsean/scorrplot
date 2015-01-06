@@ -206,67 +206,66 @@ view. Can include labels from the rows or pipe in from the interactive display.}
 http://mckennapsean.com/projects/s-corrplot/
 }
 \examples{
+
+# load library
 library(scorr)
 
-####
-#Create uniform random data sets with 10 dimensions and 10000 points
-####
+# create a uniform random dataset
+# 10,000 variables with 10 observations each
+m = matrix(runif(10 * 10000), ncol = 10, nrow = 10000);
+data = data.frame(m)
 
-m <- matrix(runif(10*10000), ncol=10, nrow=10000);
-data <- data.frame(m)
-
-#random labels
-#(labels need to be in the last column of the data frame)
-data$labels = as.factor(ceiling( (0.1 + runif(10000)) * 4) )
-#names for labels
-levels(data$labels) = c("A", "B", "C", "D", "E");
-#names for data points
+# add random labels (as factors!)
+data$labels = as.factor(ceiling((0.1 + runif(10000)) * 4))
+levels(data$labels) = c("A", "B", "C", "D", "E")
 names = c();
-for(i in 1:10000){ names[i] = paste("name", i, sep="-")}
-rownames(data) = names;
+for(i in 1 : 10000)
+  names[i] = paste("name", i, sep = "-")
 
+rownames(data) = names
 
-####
-#use the s-CorrPlot to explore data
-####
-
-#start up interactive display
+# start up the s-CorrPlot interactive display
+# disable density estimation since random data is spread out
 scorr(data)
 
-#get the number of points on the screen
+# get the number of variables or points on the screen
 scorr.get.size()
 
-#query current selected data point index
-sel <- scorr.get.selected()
+# select a new variable of interest
+scorr.set.primary(data[3, 1 : ncol(data) - 1])
 
-#query all points for their density estimation values
-#must have used the density estimation for this command
-dens <- scorr.get.density()
+# query the currently selected primary variable of interest (as index)
+scorr.get.selected()
 
-#query the positive correlations between 0.95 and 1 to the current projection
-corr <- scorr.get.corr(0.95)
+# query all points for their density estimation values
+# MUST have enabled density estimation earlier to do so!
+density = scorr.get.density()
 
-#query the negative correlations between -0.95 and -1 to the current projection
-acorr <- scorr.get.acorr(0.95)
+# query the positive correlations between 0.95 and 1 in our current projection
+corr = scorr.get.corr(0.95)
 
-#query top 100 correlations to the current projection
-cor <- scorr.get.cor(100)
+# query the negative correlations between -0.95 and -1 in our current projection
+acorr = scorr.get.acorr(0.95)
 
-#query top 100 correlations to the current projection
-acor <- scorr.get.acor(100)
+# query the top 100 correlations in our current projection
+cor = scorr.get.cor(100)
 
+# query the top 100 anti-correlations in our current projection
+acor = scorr.get.acor(100)
 
-#highlight points 1 through 10
-scorr.highlight.index(1:10);
+# highlight our first ten variables in the plot
+scorr.highlight.index(1 : 10);
 
-#highlight by names
+# highlight some other variables by their names
 scorr.highlight.name(c("name-45", "name-101"))
 
-#make sure to close the s-CorrPlot before closing R
-#( you can also close the display by pressing 'q' in the s-CorrPlot
-#  display )
-scorr.close();
+# create a static plot of our current view
+# must have called scorr() first in order to use the get functions!
+scorr.plot(data, scorr.get.primary(), scorr.get.secondary())
 
+# before closing R, be sure to close the s-CorrPlot!
+# you can call the function below or just press 'q' in the tool
+scorr.close()
 
 }
 \keyword{multivariate,models,nonlinear,nonparametric,iplot}
