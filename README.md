@@ -1,7 +1,7 @@
 [**s-CorrPlot**: Visualizing Correlation](http://mckennapsean.github.io/scorrplot)
 ==================================================================================
 
-The **s-CorrPlot** is an interactive scatterplot for visually exploring pairwise correlation coefficients between variables in large datasets. Variables are projected as points on a scatterplot with respect to some user-selected variables of interest, driven by a geometric interpretation of correlation. The correlation of all other variables to the selected one is indicated by vertical gridlines in the plot. By selecting new variables of interest, a user can create simple tours of the correlation space through animations between different projections of the data.
+The **s-CorrPlot** is an interactive scatterplot for visually exploring pairwise correlation coefficients between variables in large datasets. Variables are projected as points on a scatterplot with respect to some user-selected variables of interest, driven by a geometric interpretation of correlation. The correlation of all other variables to the selected one is indicated by vertical gridlines in the plot. By selecting new variables of interest, a user can create simple tours of the correlation space through animations between different projections of the data. For more details, check out [our companion paper](http://mckennapsean.com/projects/s-corrplot/).
 
 
 
