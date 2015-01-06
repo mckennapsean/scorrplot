@@ -1,99 +1,92 @@
 [**s-CorrPlot**: Visualizing Correlation](http://mckennapsean.github.io/scorrplot)
 ==================================================================================
 
-The **s-CorrPlot** is a new scatterplot for visually exploring pairwise correlation coefficients between all variables in large datasets.
+The **s-CorrPlot** is an interactive scatterplot for visually exploring pairwise correlation coefficients between variables in large datasets. Variables are projected as points on a scatterplot with respect to some user-selected variables of interest, driven by a geometric interpretation of correlation. The correlation of all other variables to the selected one is indicated by vertical gridlines in the plot. By selecting new variables of interest, a user can create simple tours of the correlation space through animations between different projections of the data.
 
 
 
-About the **s-CorrPlot**
-------------------------
+Demo Video
+----------
 
-The degree of correlation between variables is used in many data analysis applications as a key measure of similarity. The most common techniques for visualizing correlation, like scatterplot matrices and clustered heatmaps, however, do not scale well to large datasets, either computationally or visually. We present a new visualization that is capable of encoding pairwise correlation between hundreds of thousands variables, called the **s-CorrPlot**. The **s-CorrPlot** is based on a 2D scatterplot and exploits the geometric structure underlying Pearson’s correlation to derive a novel spatial encoding. The **s-CorrPlot** not only depicts a visually precise measure of correlation, but also supports visualizing metadata using encoding channels like color. We implemented the **s-CorrPlot** as an open-source proof of concept visualization in order to validate its effectiveness through a variety of methods including a case study with a biology collaborator.
-
-
-This proof of concept employs simple multidimensional exploration techniques, to demonstrate how this visual encoding can employ the vast set of these exploration techniques for exploring correlation.
-
-For further details, please read the description and derivation of the **s-CorrPlot** in our paper.
-
-
-
-Code Dependencies
------------------
-
-The **s-CorrPlot** has been implemented within a proof of concept prototype, *scorr*. The proof of concept is integrated within the R statistical framework for data input and output, but the remainder of the code is written in C++ and OpenGL.
-
-The source code has been compiled and tested on both Mac OS X and Linux.
-
-To compile the *scorr* through R, the following components must be installed:
-
--  **R** ([version 2.10 or newer](http://www.r-project.org/))
--  **Xcode** (for *Mac*, [install Xcode](https://developer.apple.com/xcode/) and [download command line tools](https://developer.apple.com/support/xcode/))
--  **Fortran compiler** (for *Mac*, [update your version](http://cran.r-project.org/bin/macosx/tools/))
--  **OpenGL** (for *Linux*, OpenGL library [like freeglut](http://freeglut.sourceforge.net/))
+[![s-CorrPlot video demo](img/scorrplot.png)](https://www.youtube.com/watch?v=rAFDG2Ut2D0)
 
 
 
 Installation
 ------------
 
-Be sure to install all dependencies, as detailed above.
-
-Then, simply run the install script as root:
-
-    sudo ./install
-
-If it prints out "Done", then the *s-CorrPlot* has installed correctly inside R, as the library *"scorr"*.
+    R
+    install.packages("devtools")
+    devtools::install_github("mckennapsean/scorrplot")
 
 
 
-Visualizing Correlation
------------------------
+Demos
+-----
 
-If you do not need a fully interactive prototype, you can ignore the above dependencies and installation process. Instead, simply create static plots of the s-CorrPlot by using the provided **s-CorrPlot**.R function within the *code/* folder.
+Once installed, the R-package *scorr* includes example datasets and demos to help you learn how to use the interactive tool. Below is a list of the names of the demos which show correlation between the given variables.
 
-To explore correlation using the prototype, you can load the data from the paper in our proof of concept visualization.
-Sample scripts load the data in R, and the data is provided in R format so that you can input your own data, too.
+- **gene1** : genes across different mice in two brain regions
+- **gene2** : genes across different mice in nine brain regions
+- **image** : image patches across two different image datasets
+- **random** : random variables, illustrating how to build a data frame for *scorr*
+- **subwayStops** : subway stop ridership in different regions of NYC
+- **subwayTime** : subway ridership across the years in NYC
 
-Each script loads a different dataset, corresponding to figures from the paper. The variables being correlated are listed first in the description:
-
--  **genes**.R
-   -  genes in two brain regions, *Figure 6*
--  **geneDensity**.R
-   -  genes in several regions, *Figure 3*
--  **imagePatches**.R
-   -  subset of image patches of a full image, *Figure 1(c)*
--  **imagePatches-full**.R
-   -  complete image patches for two image datasets, *Figure 1(b)*
--  **subway-stops**.R
-   -  stations of subway ridership, *Figure 4(b)*
--  **subway-time**.R
-   -  years of subway ridership, *Figure 4(a)*
-
-Certain datasets have been anonymized in order to protect our biology collaborator's sensitive data.
-
-These scripts can be run from terminal or loaded in R:
-
-    ./genes.R
-
-*or*
+Then, for any demo name above:
 
     R
-    source("genes.R")
+    library(scorr)
+    demo(random)
+    # press ENTER to continue with demo
 
-Please note that these scripts cannot be run from the R GUI program; they must be executed from the terminal.
 
-For further instructions on how to use the *s-CorrPlot*, please read the [code documentation](http://mckennapsean.github.io/scorrplot/documentation.html).
+
+Interactions
+------------
+
+Within the tool, you can interactively define new projections of the data by selecting new variables of interest in the plot or by selecting other data-driven projections, like the principal component bar charts. Animated transitions show the reorientation of the projection plane to these new selections. You can select primary and secondary variables of interest by left and right click, respectively.
+
+There are also various keyboard commands within the tool, such as left and right arrow to adjust transparency of points in the s-CorrPlot. Furthermore, there are various queries from R that can pass data to and from the tool. For more details, please consult the package documentation.
+
+
+
+System Requirements
+-------------------
+
+The **s-CorrPlot** is integrated within the R statistical framework for data input and output, but the interactive tool is largely written in C++ and OpenGL. It has been tested on Mac OS X and Linux.
+
+To compile the *scorr* R-package, you need the following components:
+
+-  **R** ([version 2.10 or newer](http://www.r-project.org/)) + [devtools](https://github.com/hadley/devtools)
+-  **Xcode** (for *Mac*, [install Xcode](https://developer.apple.com/xcode/) and [download command line tools](https://developer.apple.com/support/xcode/))
+-  **OpenGL** (for *Linux*, OpenGL library [like freeglut](http://freeglut.sourceforge.net/))
+
+
+
+Development
+-----------
+
+In order to contribute to package development, please ensure you have a development environment that installs the library as explained above. Then, download the code from GitHub into your own local folder.
+
+Once you have entered that local folder in your terminal, simply enter the following commands to re-compile and test the package with any edits you make to the source:
+
+    R
+    devtools::load_all()
+
+Then, you can test out the *scorr* tool inside R, such as:
+
+    data(gene1)
+    scorr(gene1)
+
+Feel free to submit any issues or pull requests you have to us!
 
 
 
 Uninstallation
 --------------
 
-Run the uninstall script as root or start R to remove the *scorr* package:
-
-    sudo ./uninstall
-
-*or*
+Simply remove the *scorr* package:
 
     R
     remove.packages("scorr")
@@ -110,9 +103,10 @@ This project's code is licensed by GPLv2.
 Authors
 -------
 
-[Sean McKenna](http://www.seanpmckenna.com/), [Miriah Meyer](http://www.cs.utah.edu/~miriah/), [Christopher Gregg](http://www.neuro.utah.edu/people/faculty/gregg.html), & [Samuel Gerber](http://www.math.duke.edu/~sgerber/)
+- [Sean McKenna](http://mckennapsean.com/)
+- [Samuel Gerber](http://www.math.duke.edu/~sgerber/)
 
-The *s-CorrPlot* package was originally designed and developed by [Samuel Gerber](http://www.math.duke.edu/~sgerber/).
+The *scorr* package was originally designed and developed as the tool *gyroscope*, written by [Samuel Gerber](http://www.math.duke.edu/~sgerber/).
 
 
 
