@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>s-CorrPlot</h1>
-        <p>Proof of concept prototype that demonstrates a novel spatial encoding of correlation.</p>
+        <p>interactive scatterplot for visually exploring pairwise correlation</p>
 
         <p class="view"><a href="https://github.com/mckennapsean/scorrplot">View the Project on GitHub <small>mckennapsean/scorrplot</small></a></p>
 
@@ -29,195 +29,221 @@
       </header>
       <section>
   
-  <h1 id='gyroscope'>Documentation for <em>Gyroscope</em></h1>
+  <h1 id='scorr'>Documentation for <em>scorr</em></h1>
 
-<p>An implementation of the <strong>s-CorrPlot</strong>: a new scatterplot for visually exploring pairwise correlation coefficients between all variables in large datasets.</p>
+<p>An implementation of the <strong>s-CorrPlot</strong> in R using C++ and OpenGL.</p>
 
-<h2 id='about_gyroscope'>About <em>Gyroscope</em></h2>
+<h2 id='description'>About <em>scorr</em></h2>
 
-<p><em>Gyroscope</em> is an interactive visualization proof of concept for exploring correlation structure in large datasets.</p>
+<p>The <strong>s-CorrPlot</strong> is an interactive scatterplot for visually exploring pairwise correlation coefficients between variables in large datasets. Variables are projected as points on a scatterplot with respect to some user-selected variables of interest, driven by a geometric interpretation of correlation. The correlation of all other variables to the selected one is indicated by vertical gridlines in the plot. By selecting new variables of interest, a user can create simple tours of the correlation space through animations between different projections of the data.</p>
 
-<p>The main component view of this proof of concept is the <strong>s-CorrPlot</strong>, which is a 2D orthogonal projection of the z-scores of each variable in the dataset, represented by a point on the screen. For points lying directly on the unit circle in the scatterplot, the correlation coefficients to all other variables is encoded spatially. For all other points, we get more certain about exact correlation coefficients as they move closer to the outer edge of the circular scatterplot. For further details on the <strong>s-CorrPlot</strong>, please see our companion paper.</p>
+<p>For further details about the s-CorrPlot, please refer to <a href="http://mckennapsean.com/projects/s-corrplot/">our companion paper</a>.</p>
 
-<h2 id='main_view'>Main View</h2>
+<h2 id='tool_overview'>Tool Overview</h2>
 
-<p>In R, the call <em>gyroscope</em> starts up the tool with the main view of the <strong>s-CorrPlot</strong> and several additional linked views. As we move from left to right, horizontal lines in the <strong>s-CorrPlot</strong> correspond to correlation coefficients of -0.9, -0.8, &#8230;, -0.1, 0, 0.1, &#8230;, 0.9 with respect to point or variable on the right-most location in the scatterplot.</p>
+<p>The call <em>scorr(data)</em> will initialize the s-CorrPlot tool with your input dataset. In this view, the default projection is based off of the first two principal component vectors of the dataset, but you can select any other variables in the plot to animate to a new projection of the data. These principal components are illustrated as interactive bar-charts on the left of the screen. A dataset must provide factor labels for the entire dataset, and each unique label is given its own color as shown in the boxes along the bottom. Lastly, on the right is both a parallel coordinate plot showing a profile of the observations for each variable as well as a text display for all variables near the cursor in the display.</p>
 
-<p>Every point is marked with a text label corresponding to the underlying variable being correlated. Additionally, every variable has a color, which can be activated and deactivated in the bottom color label legend. Bar charts on the left-hand side show the principal component standard deviations for not only the full dataset but also for each colored or labeled dataset as well. Lastly, on the right is a parallel coordinates linked view to show the profile of any single variable or point across all of its observations.</p>
+<h2 id="data_format">Data Format</h2>
+
+<p>The s-CorrPlot expects a data frame where each row is your variable and its columns correspond to different observations, where <em>rownames</em> and <em>colnames</em> correspond to these respectively. Additionally, a final column of nominal labels is expected (the factor data type), so that each variable gets an associated color in the plot. Each row variable will become a point in the final s-CorrPlot display, and the observations will be displayed for these points using the parallel coordinates view. For further details, please see the package's provided data <em>data(NAME)</em> as well as the data frame constructed in the example.</p>
 
 <h2 id='mouse_interactions'>Mouse Interactions</h2>
 
-<p>By moving the mouse over data points, the text labels for each point or variable is listed in order of proximity to the mouse on the right-hand side of the screen. Clicking with the mouse on points in the scatterplot causes a reorientation of the projection plane so that the clicked point becomes the new primary point of interest, i.e. it gets moved to the right-most location on the scatterplot.</p>
+<p>Hovering the mouse over the data points will update the parallel coordinate plot and text display views by the variables near the cursor. Additionally, you can left-click variables or the bar-charts to select them as the new primary variable of interest, thus animating the plot accordingly and this point moves to the right-most part of the circular plot. All correlation coefficients to this primary variable can be read directly by vertical gridlines, where anti-correlated variables are furthest away and zero correlation is near the middle.</p>
 
-<p>Similarly, by clicking on any of the bars in the bar charts causes the projection plane to be reoriented to that specific principal component as the new primary point of interest, aligning it also to the right-most location.</p>
-
-<p>In addition to this primary point of interest, the projection plane can also be reoriented by a secondary point of interest, so long as it is collinear with the primary. To do so with any point or principal component, simply hold down the Control button when clicking on points to select them as a secondary point of interest, thus causing that point to move to the outer edge of the scatterplot. This also guarantees exact spatial encoding of the correlation coefficient for that point of interest as well.</p>
-
-<p>By holding down Shift when clicking on points, they are permanently labeled in the scatterplot, and they are also overlaid on top of the currently hovered over point in the parallel coordinates linked view. This allows for detailed comparison of multiple points or variables.</p>
-
-<p>Clicking on the different colored label legends will highlight or un-highlight that particular set of points in all other views.</p>
+<p>Additionally, you can right-click the bars or points in order to select them as the new secondary variable of interest, and then the s-CorrPlot will animate the projection by moving all variables vertically to their new locations. It is also possible to shift-click on variables in order to affix them in the parallel coordinates plot for quick comparison against other variables.</p>
 
 <h2 id='keyboard_interactions'>Keyboard Interactions</h2>
 
-<p>The scatterplot can display Pearson&#8217;s correlation (&#8217;p&#8217;) by default, but you can also switch to using Spearman&#8217;s correlation (&#8217;s&#8217;).</p>
+<p>To analyze correlation with Spearman&#8217;s rank correlation, press &#8217;s&#8217;. You can return to the default of Pearson&#8217;s correlation by pressing &#8217;p&#8217;.</p>
 
-<p>Pressing &#8216;b&#8217; toggles between black and white backgrounds.</p>
+<p>To remove all highlighting and selected variables in the display, press &#8217;c&#8217;.</p>
 
-<p>To remove the selection of highlighting and points in all views, press &#8216;c&#8217;.</p>
+<p>To adjust transparency of data points, press the left and right arrow keys.</p>
 
-<p>The left and right arrows control the transparency of the data points.</p>
+<p>To adjust the size of data points, press the up and down arrow keys.</p>
 
-<p>The up and down arrows control the size of the data points.</p>
+<p>To adjust the kernel bandwidth for density estimation, press &#8217;<&#8217; or &#8217;>&#8217;.</p>
 
-<p>The &#8217;&gt;&#8217; and &#8217;&lt;&#8217; keys broaden and narrow the density estimation effect on the transparency of points, respectively.</p>
+<p>To change the background color of the plot, press &#8217;b&#8217;.</p>
 
-<p>Pressing &#8216;a&#8217; toggles off the text labels for the first colored label of variables (to avoid over-plotting).</p>
+<h2 id="queries">Queries through R Console</h2>
 
-<h2 id='running_the_proof_of_concept'>Running the Proof of Concept</h2>
+<p>Once you have initialized the s-CorrPlot tool, there are several commands to interact with the display from the R console.</p>
 
-<p>To run the proof of concept, <em>Gyroscope</em> expects to receive an R dataframe where each row is a variable to be correlated, i.e. each row will become a point on the scatterplot. Names for each of these points are extracted from the <em>rownames</em> of the dataframe, and coordinate names are extracted through <em>colnames</em>. The last column in the dataframe must be a label to create sets of different colored points, though, for a singular dataset, this can just be all the same text label. For more details, see the example datasets or the randomized data example below.</p>
+<p>The primary or secondary projection can be set directly by passing in a vector with the observations stored in the columns (or length equal to the number of observations in the input data). These can be input using <em>scorr.set.primary()</em> and <em>scorr.set.secondary()</em>. Additionally, these same vectors can be output to R using the associated get functions.</p>
 
-<p>After <em>Gyroscope</em> is running, there are several commands through R that you can use to interact with the display. Some of these commands allow you to output the top correlated or anti-correlated points in a specific view, highlight certain points in the scatterplot, and also select these points as new primary or secondary points of interest to redefine the projected scatterplot. The details of these commands are provided below.</p>
+<p>The values used for density estimation in the current view of the tool can be output back into R using the call <em>scorr.get.density()</em>.</p>
 
-<h2 id='commands_for_gyroscope_features'>Commands for <em>Gyroscope</em> Features</h2>
+<p>To retrieve the currently n top correlation or anti-correlated points (i.e. left-most and right-most points, respectively), call <em>scorr.get.cor(n)</em> or <em>scorr.get.acor(n)</em>, which returns a data frame with n rows with columns corresponding to each variable's index in the input data, its correlation to the primary variable, and its rowname. Similarly, you can call either <em>scorr.get.corr(r)</em> or <em>scorr.get.acorr(r)</em> in order to output all variables with above or below the given correlation coefficient, respectively.</p>
 
-<ul>
-<li><p>gyroscope(data, perms = 0, threshold = 0, useDensity = T, showProfile = T, showPatch = F)</p>
+<p>To highlight a set of variables, pass a list of indices to highlight into the command <em>scorr.highlight.index()</em> or a list of names to <em>scorr.highlight.name()</em>.</p>
 
-<ul>
-<li><p>data: a dataframe with n columns and m rows, with n - 1 variables being correlated &amp; m observations; column n is a textual label assignment</p></li>
-<li><p>perms: number of permutations for a permutation test of any specific view; this test computes the probability that there is a projection with more points with correlation r &gt; a for a &gt;= 0 &amp; r &lt; a for a &lt;= 0, than the current shown projection</p></li>
-<li><p>threshold: ignore data points below a certain absolute threshold are excluded</p></li>
-<li><p>useDensity: determine transparency of points based on a density estimate of the points on the correlation sphere</p></li>
-<li><p>showProfile: display the parallel coordinates linked view</p></li>
-<li><p>showPatch: display each data point as a grayscale patch image</p></li>
-</ul></li>
-<li><p>gyroscope.highlight.index(indices)</p>
+<p>The call <em>scorr.close()</em> will close the interactive tool safely.</p>
+
+<p>The function <em>scorr.plot()</em> takes data and two variables as input in order to produce a static version of the s-CorrPlot, in case the interactive tool is unable to build or run on a machine. This is useful for Windows computers, since they are unable to compile the tool.</p>
+
+<h2 id="commands"><em>scorr</em> Commands</h2>
 
 <ul>
-<li><p>indices: highlight the <em>rownames</em> of any specified points</p></li>
-</ul></li>
-<li><p>gyroscope.highlight.name(names)</p>
-
-<ul>
-<li><p>names: highlight points in the <em>Gyroscope</em> display based on their <em>rownames</em></p></li>
-</ul></li>
-<li><p>gyroscope.get.size()</p>
-
-<ul>
-<li>get the number of points in the plot</li>
-</ul></li>
-<li><p>gyroscope.get.selected()</p>
-
-<ul>
-<li>output the list of selected points</li>
-</ul></li>
-<li><p>gyroscope.get.density()</p>
-
-<ul>
-<li>get current density values of all points in the scatterplot</li>
-</ul></li>
-<li><p>gyroscope.get.corr(r)</p>
-
-<ul>
-<li><p>r: retrieve correlated points above some threshold r</p></li>
-</ul></li>
-<li><p>gyroscope.get.acorr(r)</p>
-
-<ul>
-<li><p>r: retrieve correlation points below some threshold -r</p></li>
-</ul></li>
-<li><p>gyroscope.get.cor(n)</p>
-
-<ul>
-<li><p>n: retrieve the top n most correlated points</p></li>
-</ul></li>
-<li><p>gyroscope.get.acor(n)</p>
-
-<ul>
-<li><p>n: retrieve the top n most anti-correlated points</p></li>
-</ul></li>
-<li><p>gyroscope.get.name(indices)</p>
-
-<ul>
-<li>get the <em>rownames</em> of any specified points</li>
-</ul></li>
-<li><p>gyroscope.set.primary(v)</p>
-
-<ul>
-<li><p>v: set the vector v as the primary point of interest</p></li>
-</ul></li>
-<li><p>gyroscope.set.secondary(v)</p>
-
-<ul>
-<li><p>v: set the vector v as the secondary point of interest</p></li>
-</ul></li>
-<li><p>gyroscope.close()</p>
-
-<ul>
-<li>close <em>Gyroscope</em></li>
-</ul></li>
+  <li><p>scorr(data, useDensity = T, showProfile = T, showPatch = F, threshold = 0, coloring = 1 : nrows(data), perms = 0)</p>
+    <ul>
+      <li><p>data: A data frame with d columns and n rows. Each row is a variable and the first 1:(d-1) columns are observations and the nth column is a label assignment in the form of a factor. Names for the variables should be supplied in <em>rownames(data)</em>, and names for each column can be supplied in <em>colnames(data)</em></p></li>
+      <li><p>useDensity: Set transparancey of the plotted variables based on a density estimate of the distribution along the correlation sphere.</p></li>
+      <li><p>showProfile: Show the parallel coordinates plot.</p></li>
+      <li><p>showPatch: Show each variable as a greysacle patch image.</p></li>
+      <li><p>threshold: Variables with variance below the threshold are excluded.</p></li>
+      <li><p>coloring: Alternate continuous values for each variable for coloring the data instead of using labels (switch by pressing c).</p></li>
+      <li><p>perms: Number of permutations for permutation test of projection. The permutation test computes the probability that there is a projection with more points with correlation r &gt;a for a &gt;=0 and r &lt;a for a &gt;=0 than the current shown projection.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.set.primary(v)</p>
+    <ul>
+      <li><p>v: Vector with d-1 columns in order to set a new projection.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.set.secondary(v)</p>
+    <ul>
+      <li><p>v: Vector with d-1 columns in order to set a new projection.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.primary()</p>
+    <ul>
+      <li><p>output the primary variable vector of interest for the current projection</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.secondary()</p>
+    <ul>
+      <li><p>output the secondary variable vector of interest for the current projection</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.size()</p>
+    <ul>
+      <li><p>get the number of points in the plot</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.selected()</p>
+    <ul>
+      <li><p>output the list of selected points</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.density()</p>
+    <ul>
+      <li><p>get current density values of all points in the scatterplot</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.corr(r)</p>
+    <ul>
+      <li><p>r: Correlation coefficient to threshold which variables to output.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.acorr(r)</p>
+    <ul>
+      <li><p>r: Correlation coefficient to threshold which variables to output.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.cor(n)</p>
+    <ul>
+      <li><p>n: Number of top anti-/correlations to retrieve.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.acor(n)</p>
+    <ul>
+      <li><p>n: Number of top anti-/correlations to retrieve.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.get.name(indices)</p>
+    <ul>
+      <li><p>indices: Variable indices to retrieve the names of, likely in order to highlight them in the s-CorrPlot display.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.highlight.index(indices)</p>
+    <ul>
+      <li><p>indices: Variable indices to retrieve the names of, likely in order to highlight them in the s-CorrPlot display.</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.highlight.name(names)</p>
+    <ul>
+      <li><p>names: Data point names to highlight in the s-CorrPlot display</p></li>
+    </ul>
+  </li>
+  <li><p>scorr.close()</p>
+    <ul>
+      <li><p>close <em>scorr</em></p></li>
+    </ul>
+  </li>
+  <li><p>scorr.plot(data2, v2, v2)</p>
+    <ul>
+      <li><p>data2: A data frame where rows correspond to variables. May include the final column as factor labels for automatic coloring but not required.</p></li>
+      <li><p>v2: Both a primary and secondary vector for defining a static s-CorrPlot view. Can include labels from the rows or pipe in from the interactive display.</p></li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id='code_example'>Code Example</h2>
+<h2 id="code_example">Example Code</h2>
 
-<p>This is a code example to create a random dataset and view it in <em>Gyroscope</em>.</p>
+<p>This is a code example to create a random dataset and view it in <em>scorr</em>.</p>
 
-<pre><code>library(gyroscope)
+<pre><code># load library
+library(scorr)
 
-######
-# random dataset with 10,000 variables, 10 dimensions
-#######
+# create a uniform random dataset
+# 10,000 variables with 10 observations each
+m = matrix(runif(10 * 10000), ncol = 10, nrow = 10000);
+data = data.frame(m)
 
-m &lt;- matrix(runif(10*10000), ncol=10, nrow=10000)
-data &lt;- data.frame(m)
-
-# random labels (last column of dataframe)
-data$labels = as.factor(ceiling( (0.1 + runif(10000)) * 4) )
+# add random labels (as factors!)
+data$labels = as.factor(ceiling((0.1 + runif(10000)) * 4))
 levels(data$labels) = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;)
+names = c();
+for(i in 1 : 10000)
+  names[i] = paste(&quot;name&quot;, i, sep = &quot;-&quot;)
 
-names = c()
-for(i in 1:10000){ names[i] = paste(&quot;name&quot;, i, sep=&quot;-&quot;)}
 rownames(data) = names
 
+# start up the s-CorrPlot interactive display
+# disable density estimation since random data is spread out
+scorr(data)
 
-######
-# run Gyroscope to explore correlation
-######
+# get the number of variables or points on the screen
+scorr.get.size()
 
-# start up interactive display
-gyroscope(data)
+# select a new variable of interest
+scorr.set.primary(data[3, 1 : ncol(data) - 1])
 
-# get the number of points on the screen
-gyroscope.get.size()
-
-# query current selected data point index
-sel &lt;- gyroscope.get.selected()
+# query the currently selected primary variable of interest (as index)
+scorr.get.selected()
 
 # query all points for their density estimation values
-# must have used the density estimation for this command
-dens &lt;- gyroscope.get.density()
+# MUST have enabled density estimation earlier to do so!
+density = scorr.get.density()
 
-# query the positive correlations between 0.95 and 1 to the current projection
-corr &lt;- gyroscope.get.corr(0.95)
+# query the positive correlations between 0.95 and 1 in our current projection
+corr = scorr.get.corr(0.95)
 
-# query the negative correlations between -0.95 and -1 to the current projection
-acorr &lt;- gyroscope.get.acorr(0.95)
+# query the negative correlations between -0.95 and -1 in our current projection
+acorr = scorr.get.acorr(0.95)
 
-# query top 100 correlations to the current projection
-cor &lt;- gyroscope.get.cor(100)
+# query the top 100 correlations in our current projection
+cor = scorr.get.cor(100)
 
-# query top 100 correlations to the current projection
-acor &lt;- gyroscope.get.acor(100)
+# query the top 100 anti-correlations in our current projection
+acor = scorr.get.acor(100)
 
-# highlight the first ten points in the dataset
-gyroscope.highlight.index(1:10)
+# highlight our first ten variables in the plot
+scorr.highlight.index(1 : 10);
 
-# highlight specific data points
-gyroscope.highlight.name(c(&quot;name-45&quot;, &quot;name-101&quot;))
+# highlight some other variables by their names
+scorr.highlight.name(c(&quot;name-45&quot;, &quot;name-101&quot;))
 
-# make sure to close gyroscope before closing R (also &#39;q&#39; in Gyroscope)
-gyroscope.close()</code></pre>
+# create a static plot of our current view
+# must have called scorr() first in order to use the get functions!
+scorr.plot(data, scorr.get.primary(), scorr.get.secondary())
+
+# before closing R, be sure to close the s-CorrPlot!
+# you can call the function below or just press &#39;q&#39; in the tool
+scorr.close()
+</code></pre>
 
 <h2>
 <a name="contact" class="anchor" href="#contact"><span class="octicon octicon-link"></span></a>Contact</h2>
