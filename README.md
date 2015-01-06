@@ -38,6 +38,7 @@ Then, for any demo name above:
     R
     library(scorr)
     demo(random)
+    # press ENTER to continue the demo
 
 
 
