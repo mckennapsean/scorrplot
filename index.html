@@ -18,158 +18,129 @@
         <h1>s-CorrPlot</h1>
         <p>Proof of concept prototype that demonstrates a novel spatial encoding of correlation.</p>
 
-        <p class="view"><a href="https://github.com/mckennapsean/scorrplot">View the Project on GitHub <small>mckennapsean/scorrplot</small></a></p>
+        <p class="view"><a href="https://github.com/mckennapsean/scorrplot2">View the Project on GitHub <small>mckennapsean/scorrplot2</small></a></p>
 
 
         <ul>
-          <li><a href="https://github.com/mckennapsean/scorrplot/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/mckennapsean/scorrplot/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/mckennapsean/scorrplot">View On <strong>GitHub</strong></a></li>
+          <li><a href="https://github.com/mckennapsean/scorrplot2/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/mckennapsean/scorrplot2/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/mckennapsean/scorrplot2">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
         <h1>
-<a name="s-corrplot-visualizing-correlation" class="anchor" href="#s-corrplot-visualizing-correlation"><span class="octicon octicon-link"></span></a><strong>s-CorrPlot</strong>: Visualizing Correlation</h1>
+<a id="s-corrplot-visualizing-correlation" class="anchor" href="#s-corrplot-visualizing-correlation" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<strong>s-CorrPlot</strong>: Visualizing Correlation</h1>
 
-<p>The <strong>s-CorrPlot</strong> is a new scatterplot for visually exploring pairwise correlation coefficients between all variables in large datasets.</p>
-
-<img src="img/s-corrplot.png" />
-&nbsp;
+<p>The <strong>s-CorrPlot</strong> is an interactive scatterplot for visually exploring pairwise correlation coefficients between variables in large datasets. Variables are projected as points on a scatterplot with respect to some user-selected variables of interest, driven by a geometric interpretation of correlation. The correlation of all other variables to the selected one is indicated by vertical gridlines in the plot. By selecting new variables of interest, a user can create simple tours of the correlation space through animations between different projections of the data. For more details, see <a href="http://mckennapsean.com/projects/s-corrplot/">our companion paper</a>.</p>
 
 <h2>
-<a name="about-the-s-corrplot" class="anchor" href="#about-the-s-corrplot"><span class="octicon octicon-link"></span></a>About the <strong>s-CorrPlot</strong>
-</h2>
+<a id="demo-video" class="anchor" href="#demo-video" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo Video</h2>
 
-<p>The degree of correlation between variables is used in many data analysis applications as a key measure of similarity. The most common techniques for visualizing correlation, like scatterplot matrices and clustered heatmaps, however, do not scale well to large datasets, either computationally or visually. We present a new visualization that is capable of encoding pairwise correlation between hundreds of thousands variables, called the <strong>s-CorrPlot</strong>. The <strong>s-CorrPlot</strong> is based on a 2D scatterplot and exploits the geometric structure underlying Pearson’s correlation to derive a novel spatial encoding. The <strong>s-CorrPlot</strong> not only depicts a visually precise measure of correlation, but also supports visualizing metadata using encoding channels like color. We implemented the <strong>s-CorrPlot</strong> as an open-source proof of concept visualization in order to validate its effectiveness through a variety of methods including a case study with a biology collaborator.</p>
-
-<p>This proof of concept employs simple multidimensional exploration techniques, to demonstrate how this visual encoding can employ the vast set of these exploration techniques for exploring correlation.</p>
-
-<p>For further details, please read the description and derivation of the <strong>s-CorrPlot</strong> in our paper.</p>
+<p><a href="https://www.youtube.com/watch?v=rAFDG2Ut2D0"><img src="img/scorrplot.png" alt="s-CorrPlot video demo"></a></p>
 
 <h2>
-<a name="code-dependencies" class="anchor" href="#code-dependencies"><span class="octicon octicon-link"></span></a>Code Dependencies</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>The <strong>s-CorrPlot</strong> has been implemented within a proof of concept prototype: <em>Gyroscope</em>. The proof of concept is integrated within the R statistical framework for data input and output. The <em>Gyroscope</em> code is written in C++ and OpenGL.</p>
+<pre><code>R
+install.packages("devtools")
+devtools::install_github("mckennapsean/scorrplot")
+</code></pre>
 
-<p>The source code has been compiled and tested on both Mac OS X and Linux.</p>
+<h2>
+<a id="demos" class="anchor" href="#demos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demos</h2>
 
-<p>To compile <em>Gyroscope</em> through R, the following components must be installed:</p>
+<p>Once installed, the R-package <em>scorr</em> includes datasets and demos to help you. Below is a list of the names of the demos which show correlation between the given variables.</p>
 
 <ul>
-<li> <strong>R</strong> (<a href="http://www.r-project.org/">version 2.10 or newer</a>)</li>
+<li>
+<strong>gene1</strong> : genes across different mice in two brain regions</li>
+<li>
+<strong>gene2</strong> : genes across different mice in nine brain regions</li>
+<li>
+<strong>image</strong> : image patches across two different image datasets</li>
+<li>
+<strong>random</strong> : random variables, illustrating how to build a data frame for <em>scorr</em>
+</li>
+<li>
+<strong>subwayStops</strong> : subway stop ridership in different regions of NYC</li>
+<li>
+<strong>subwayTime</strong> : subway ridership across the years in NYC</li>
+</ul>
+
+<p>Then, for any demo name above:</p>
+
+<pre><code>R
+library(scorr)
+demo(random)
+</code></pre>
+
+<h2>
+<a id="interactions" class="anchor" href="#interactions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interactions</h2>
+
+<p>Within the tool, you can interactively define new projections of the data by selecting new variables of interest in the plot or by selecting other data-driven projections, like the principal component bar charts. Animated transitions show the reorientation of the projection plane to these new selections. You can select primary and secondary variables of interest by left and right click, respectively.</p>
+
+<p>There are also various keyboard commands within the tool, such as left and right arrow to adjust transparency of points in the s-CorrPlot. Furthermore, there are various queries from R that can pass data to and from the tool. For more details, please consult the package documentation.</p>
+
+<h2>
+<a id="system-requirements" class="anchor" href="#system-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>System Requirements</h2>
+
+<p>The <strong>s-CorrPlot</strong> is integrated within the R statistical framework for data input and output, but the interactive tool is largely written in C++ and OpenGL. It has been tested on Mac OS X and Linux.</p>
+
+<p>To compile the <em>scorr</em> R-package, you need the following components:</p>
+
+<ul>
+<li> <strong>R</strong> (<a href="http://www.r-project.org/">version 2.10 or newer</a>) + <a href="https://github.com/hadley/devtools">devtools</a>
+</li>
 <li> <strong>Xcode</strong> (for <em>Mac</em>, <a href="https://developer.apple.com/xcode/">install Xcode</a> and <a href="https://developer.apple.com/support/xcode/">download command line tools</a>)</li>
-<li> <strong>Fortran compiler</strong> (for <em>Mac</em>, <a href="http://cran.r-project.org/bin/macosx/tools/">update your version</a>)</li>
 <li> <strong>OpenGL</strong> (for <em>Linux</em>, OpenGL library <a href="http://freeglut.sourceforge.net/">like freeglut</a>)</li>
-</ul><h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
-
-<p>Be sure to install all dependencies, as detailed above.</p>
-
-<p>Then, simply run the install script as root:</p>
-
-<pre><code>sudo ./install
-</code></pre>
-
-<p>If it prints out "Done", then <em>Gyroscope</em> has installed correctly inside R, as the library <em>"gyroscope"</em>.</p>
+</ul>
 
 <h2>
-<a name="visualizing-correlation" class="anchor" href="#visualizing-correlation"><span class="octicon octicon-link"></span></a>Visualizing Correlation</h2>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h2>
 
-<p>If you do not need a fully interactive prototype, you can ignore the above dependencies and installation process. Instead, simply create static plots of the s-CorrPlot by using the provided <strong>s-CorrPlot</strong>.R function within the <em>code/</em> folder.</p>
+<p>To contribute to package development, please ensure you have a development environment that compiles the package. Then, download the code from GitHub into your own local folder.</p>
 
-<p>To explore correlation using the prototype, you can load the data from the paper in our proof of concept visualization.
-Sample scripts load the data in R, and the data is provided in R format so that you can input your own data, too.</p>
-
-<p>Each script loads a different dataset, corresponding to figures from the paper. The variables being correlated are listed first in the description:</p>
-
-<ul>
-<li> <strong>genes</strong>.R
-
-<ul>
-<li> genes in two brain regions, <em>Figure 6</em>
-</li>
-</ul>
-</li>
-<li> <strong>geneDensity</strong>.R
-
-<ul>
-<li> genes in several regions, <em>Figure 3</em>
-</li>
-</ul>
-</li>
-<li> <strong>imagePatches</strong>.R
-
-<ul>
-<li> subset of image patches of a full image, <em>Figure 1(c)</em>
-</li>
-</ul>
-</li>
-<li> <strong>imagePatches-full</strong>.R
-
-<ul>
-<li> complete image patches for two image datasets, <em>Figure 1(b)</em>
-</li>
-</ul>
-</li>
-<li> <strong>subway-stops</strong>.R
-
-<ul>
-<li> stations of subway ridership, <em>Figure 4(b)</em>
-</li>
-</ul>
-</li>
-<li> <strong>subway-time</strong>.R
-
-<ul>
-<li> years of subway ridership, <em>Figure 4(a)</em>
-</li>
-</ul>
-</li>
-</ul><p>Certain datasets have been anonymized in order to protect our biology collaborator's sensitive data.</p>
-
-<p>These scripts can be run from terminal or loaded in R:</p>
-
-<pre><code>./genes.R
-</code></pre>
-
-<p><em>or</em></p>
+<p>Once you have entered that local folder in your terminal, simply enter the following commands to re-compile and test the package with any edits you make to the source:</p>
 
 <pre><code>R
-source("genes.R")
+devtools::load_all()
 </code></pre>
 
-<p>Please note that these scripts cannot be run from the R GUI program; they must be executed from the terminal.</p>
+<p>Then, you can test out the <em>scorr</em> tool inside R, such as:</p>
 
-<p>For further instructions on how to use <em>Gyroscope</em>, please read the <a href="documentation.html">code documentation</a>.</p>
+<pre><code>data(gene1)
+scorr(gene1)
+</code></pre>
+
+<p>Feel free to submit any issues or pull requests you have to us!</p>
 
 <h2>
-<a name="uninstallation" class="anchor" href="#uninstallation"><span class="octicon octicon-link"></span></a>Uninstallation</h2>
+<a id="uninstallation" class="anchor" href="#uninstallation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Uninstallation</h2>
 
-<p>Run the uninstall script as root or start R to remove the <em>Gyroscope</em> package:</p>
-
-<pre><code>sudo ./uninstall
-</code></pre>
-
-<p><em>or</em></p>
+<p>Simply remove the <em>scorr</em> package:</p>
 
 <pre><code>R
-remove.packages("gyroscope")
+remove.packages("scorr")
 </code></pre>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
-<p>This project's codebase <em>(Gyroscope)</em> is licensed by GPLv2.</p>
-
-<h2>
-<a name="authors" class="anchor" href="#authors"><span class="octicon octicon-link"></span></a>Authors</h2>
-
-<p><a href="http://www.seanpmckenna.com/">Sean McKenna</a>, <a href="http://www.cs.utah.edu/%7Emiriah/">Miriah Meyer</a>, <a href="http://www.neuro.utah.edu/people/faculty/gregg.html">Christopher Gregg</a>, &amp; <a href="http://www.math.duke.edu/%7Esgerber/">Samuel Gerber</a></p>
-
-<p>The <em>Gyroscope</em> code was originally designed and developed by <a href="http://www.math.duke.edu/%7Esgerber/">Samuel Gerber</a>.</p>
+<p>This project's code is licensed by GPLv2.</p>
 
 <h2>
-<a name="contact" class="anchor" href="#contact"><span class="octicon octicon-link"></span></a>Contact</h2>
+<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors</h2>
+
+<ul>
+<li><a href="http://mckennapsean.com/">Sean McKenna</a></li>
+<li><a href="http://www.math.duke.edu/%7Esgerber/">Samuel Gerber</a></li>
+</ul>
+
+<p>The <em>scorr</em> package was originally developed as the tool <em>gyroscope</em>, written by <a href="http://www.math.duke.edu/%7Esgerber/">Samuel Gerber</a>.</p>
+
+<h2>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
 
 <p>If you have any difficulties or questions, please contact <a href="mailto:sean@cs.utah.edu">sean@cs.utah.edu</a>.</p>
       </section>
