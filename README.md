@@ -24,7 +24,7 @@ Installation
 Demos
 -----
 
-Once installed, the R-package *scorr* includes example datasets and demos to help you learn how to use the interactive tool. Below is a list of the names of the demos which show correlation between the given variables.
+Once installed, the R-package *scorr* includes datasets and demos to help you. Below is a list of the names of the demos which show correlation between the given variables.
 
 - **gene1** : genes across different mice in two brain regions
 - **gene2** : genes across different mice in nine brain regions
@@ -38,7 +38,6 @@ Then, for any demo name above:
     R
     library(scorr)
     demo(random)
-    # press ENTER to continue with demo
 
 
 
@@ -67,7 +66,7 @@ To compile the *scorr* R-package, you need the following components:
 Development
 -----------
 
-In order to contribute to package development, please ensure you have a development environment that installs the library as explained above. Then, download the code from GitHub into your own local folder.
+To contribute to package development, please ensure you have a development environment that compiles the package. Then, download the code from GitHub into your own local folder.
 
 Once you have entered that local folder in your terminal, simply enter the following commands to re-compile and test the package with any edits you make to the source:
 
@@ -106,7 +105,7 @@ Authors
 - [Sean McKenna](http://mckennapsean.com/)
 - [Samuel Gerber](http://www.math.duke.edu/~sgerber/)
 
-The *scorr* package was originally designed and developed as the tool *gyroscope*, written by [Samuel Gerber](http://www.math.duke.edu/~sgerber/).
+The *scorr* package was originally developed as the tool *gyroscope*, written by [Samuel Gerber](http://www.math.duke.edu/~sgerber/).
 
 
 
