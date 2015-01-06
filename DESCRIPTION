@@ -14,6 +14,7 @@ Description: The s-CorrPlot is a scatterplot for visually exploring pairwise
     user can create simple tours of the correlation space through animations
     between different projections of the data.
 Depends: R (>= 2.10)
+Imports: plotrix, RColorBrewer
 License: GPL-2
 SystemRequirements: Mac/Linux, C++, OpenGL/GLUT
 URL: http://mckennapsean.com/scorrplot/

@@ -15,5 +15,5 @@ export(
   "scorr.set.primary",
   "scorr.set.secondary",
   "scorr.close",
-  "scorr.pretty.plot"
+  "scorr.plot"
 )
