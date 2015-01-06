@@ -1,130 +1,149 @@
 \name{scorr}
 \alias{scorr}
-\alias{scorr.highlight.index}
-\alias{scorr.highlight.name}
+\alias{scorr.set.primary}
+\alias{scorr.set.secondary}
+\alias{scorr.get.primary}
+\alias{scorr.get.secondary}
+\alias{scorr.get.size}
 \alias{scorr.get.selected}
+\alias{scorr.get.density}
+\alias{scorr.get.corr}
+\alias{scorr.get.acorr}
 \alias{scorr.get.cor}
 \alias{scorr.get.acor}
 \alias{scorr.get.name}
+\alias{scorr.highlight.index}
+\alias{scorr.highlight.name}
 \alias{scorr.close}
-\title{s-CorrPlot: Orthogonal Projections for Visualizing Correlation}
+\alias{scorr.plot}
+\title{s-CorrPlot: Visualizing Correlation}
+
 \description{
-This package provides an interactive visualization tool to explore correlation
-structures in data sets.
 
-The visualization is based on 2-dimensional orthogonal projection of the
-z-scores of each sample (data point). This allows various interpretation of the
-projected point. Most importantly for points directly on the unit circle the
-correlations to all other is exactly visualized through distances. For details
-of the orthogonal projection please have a look at the paper in the reference
-section.
+The s-CorrPlot is an interactive scatterplot for visually exploring pairwise
+correlation coefficients between variables in large datasets. Variables are
+projected as points on a scatterplot with respect to some user-selected
+variables of interest, driven by a geometric interpretation of correlation.
+The correlation of all other variables to the selected one is indicated by
+vertical gridlines in the plot. By selecting new variables of interest, a
+user can create simple tours of the correlation space through animations
+between different projections of the data.
+
+For further details about the s-CorrPlot, please refer to our companion paper.
 
 
 
-\bold{Display Description:}
+\bold{Tool Overview:}
 
-The call \code{scorr} starts up a display window with a scatter plot of the
-orthogonal projection of the z-scores. The horizontal lines correspond to 0.9,
-0.8, ..., 0.1, 0, -0.1, ..., -0.9 correlation compared to the most left point on
-the unit circle. For each point a label has to be assigned. The boxes on the
-bottom show the color for each label. The bar plots on the left hand show the
-principal component standard deviations for the complete data sets and for each
-group of points with the same label. On the right is a parallel coordinate plot
-that can show the profile of selected points.  
+The call \code{scorr(data)} will initialize the s-CorrPlot tool with your input
+dataset. In this view, the default projection is based off of the first two
+principal component vectors of the dataset, but you can select any other
+variables in the plot to animate to a new projection of the data. These
+principal components are illustrated as interactive bar-charts on the left of
+the screen. A dataset must provide factor labels for the entire dataset, and
+each unique label is given its own color as shown in the boxes along the bottom.
+Lastly, on the right is both a parallel coordinate plot showing a profile of
+the observations for each variable as well as a text display for all variables
+near the cursor in the display.
+
+
+
+\bold{Data Format:}
+
+The s-CorrPlot expects a data frame where each row is your variable and its
+columns correspond to different observations, where \code{rownames} and
+\code{colnames} correspond to these respectively. Additionally, a final column
+of nominal labels is expected (the factor data type), so that each variable
+gets an associated color in the plot. Each row variable will become a point
+in the final s-CorrPlot display, and the observations will be displayed for
+these points using the parallel coordinates view. For further details, please
+see the package's provided data \code{data(NAME)} as well as the data frame
+constructed in the example.
+
 
 
 \bold{Mouse Interactions:}
 
-By moving the mouse over data points a list of data point names appears on the
-right hand side. These are the points that are in the vicinity of the cursor.  By
-clicking with the mouse on a data point the projection plane is oriented such
-that the point is in the most left point on the unit circle and the horizontal
-lines correspond to correlations to that point. And the text list on the left
-hand side is fixed when the cursor is not over any data points to the points in
-the neighborhood of the last click. By clicking on a name from the text list the
-plane is oriented through that data point. The projection plane can also be
-oriented to any of the principal components by clicking on the corresponding bar
-on the left hand side.
+Hovering the mouse over the data points will update the parallel coordinate
+plot and text display views by the variables near the cursor. Additionally,
+you can left-click variables or the bar-charts to select them as the new primary
+variable of interest, thus animating the plot accordingly and this point moves
+to the right-most part of the circular plot. All correlation coefficients to
+this primary variable can be read directly by vertical gridlines, where anti-
+correlated variables are furthest away and zero correlation is near the middle.
 
-Since a plane through the origin is fully described through two (non collinear)
-data points an additional point can be selected to lie on the unit circle of the
-projection. This is achieved with right mouse clicks and can be done as for the
-normal mouse click on data points, bars or the data point name in text list.
+Additionally, you can right-click the bars or points in order to select them as
+the new secondary variable of interest, and then the s-CorrPlot will animate the
+projection by moving all variables vertically to their new locations. It is also
+possible to shift-click on variables in order to affix them in the parallel
+coordinates plot for quick comparison against other variables.
 
-With shift click on a data point or a data point name the data point is
-permanently display in the parallel coordinates plot and highlighted in
-the projection plane. 
 
-By clicking on the axis on the parallel coordinates plot the points are colored
-according to the values in that coordinate. By clicking on multiple coordinates
-an the average values of those coordinates, multiple coordinates can be added
-and removed by clicking on them. To facilitate comparison between two sets of
-coordinate colorings ctrl-click creates another coloring by averaging the
-coordinate values selected through ctrl-click.  
-
-Clicking on the label boxes will highlight or un-highlight the set of points of
-that label.
 
 \bold{Keyboard Interactions:}
 
-The projection can be changed to Spearman's rank correlation by pressing 's' and
-to Pearson's correlation by 'p' (default). 
+To analyze correlation with Spearman's rank correlation, press 's'. You can
+return to the default of Pearson's correlation by pressing 'p'.
 
-By pressing 'c' removes all highlighting and data points in the parallel
-coordinates plot.
+To remove all highlighting and selected variables in the display, press 'c'.
 
-Pressing the left and right arrows, decreases and increases transparency of the
-data points, respectively.
+To adjust transparency of data points, press the left and right arrow keys.
 
-By pressing 'b', the background color can be changed from the default dark to a
-bright white background, for the purposes of taking screenshots from the program
-for editing or placing as a figure into a paper.
+To adjust the size of data points, press the up and down arrow keys.
 
-By pressing 'a', the text labels for each item can be toggled on and off for the
-color red. This allows for easier visual searching of non-red items.
+To adjust the kernel bandwidth for density estimation, press '<' or '>'.
 
-The coloring scheme can be changed through pressing '1' fro label coloring, '2'
-for coloring set one of average coordinate values (selected through clicking on
-coordinates in parallel coordinate plot) and '3' for coloring set two of average
-coordinate values (ctr-click in parallel coordinates plot). 
+To change the background color of the plot, press 'b'.
 
 
 
 \bold{Queries through R console:}
 
-To start up the display call \code{scorr}. s-CorrPlot expects a data frame
-with each row a data point. Names for each data points are extract through the
-\code{rownames} of the data frame and coordinate names through \code{colnames}. The last
-column needs to be a factor which indicates for each data point to which labels
-it belongs and the names of the labels correspond to the levels of that factor.
-For details see the setup of the data frame in the example section. 
+Once you have initialized the s-CorrPlot tool, there are several commands to
+interact with the display from the R console.
 
-Once the s-CorrPlot is started there are several commands to interact with the display
-through the R console. 
+The primary or secondary projection can be set directly by passing in a vector
+with the observations stored in the columns (or length equal to the number of
+observations in the input data). These can be input using
+\code{scorr.set.primary()} and \code{scorr.set.secondary()}. Additionally,
+these same vectors can be output to R using the associated get functions.
 
-To retrieve the currently n top correlation or anti-correlated points (i.e. left
-most and right most points, respectively).  call \code{scorr.get.cor(n)} or
-\code{scorr.get.acor(n)} which will return a data frame with n rows with the
-first column the index of the data point into the data frame passed to the s-CorrPlot,
-the second row the correlation coefficients to vector corresponding to the left
-most point of the unit circle and the last row the name of the data point.
+The values used for density estimation in the current view of the tool can be
+output back into R using the call \code{scorr.get.density()}.
 
-To highlight a set of genes pass a list of indices (into the data frame) of the
-data points to highlight through \code{scorr.highlight.index} or a list of
-names through \code{scorr.highlight.name}
+To retrieve the currently n top correlation or anti-correlated points (i.e.
+left-most and right-most points, respectively), call \code{scorr.get.cor(n)} or
+\code{scorr.get.acor(n)}, which returns a data frame with n rows with columns corresponding to each variable's index in the input data, its correlation to the primary variable, and its rowname. Similarly, you can call either
+\code{scorr.get.corr(r)} or \code{scorr.get.acorr(r)} in order to output all
+variables with above or below the given correlation coefficient, respectively.
 
-To set primary or secondary projection projection directy pass a vector of
-lenngth equal the number of observation for each data point to
-\code{scorr.set.primary} or \code{scorr.set.secondary}, respectively.
+To highlight a set of variables, pass a list of indices to highlight into the
+command \code{scorr.highlight.index()} or a list of names to
+\code{scorr.highlight.name()}.
+
+The call \code{scorr.close()} will close the interactive tool safely.
+
+The function \code{scorr.plot()} takes data and two variables as input in order
+to produce a static version of the s-CorrPlot, in case the interactive tool
+is unable to build or run on a machine. This is useful for Windows computers,
+since they are unable to compile the tool.
 
 }
 
 
 \usage{
-  scorr(data, perms = 0, threshold = 0, coloring = 1:nrows(data), useDensity
-      = T, showProfile = T, showPatch = F)
-  scorrehighlight.index(indices)
-  scorr.highlight.name(names)
+  scorr(data,
+        useDensity = T,
+        showProfile = T,
+        showPatch = F,
+        threshold = 0,
+        coloring = 1 : nrows(data),
+        perms = 0
+  )
+  scorr.set.primary(v)
+  scorr.set.secondary(v)
+  scorr.get.primary()
+  scorr.get.secondary()
   scorr.get.size()
   scorr.get.selected()
   scorr.get.density()
@@ -133,46 +152,58 @@ lenngth equal the number of observation for each data point to
   scorr.get.cor(n)
   scorr.get.acor(n)
   scorr.get.name(indices)
-  scorr.set.primary(v),
-  scorr.set.secondary(v),
+  scorr.highlight.index(indices)
+  scorr.highlight.name(names)
   scorr.close()
+  scorr.plot(data2, v2, v2)
 }
 
 \arguments{
-  \item{data}{A data frame with n columns and m rows. Each row is a data point
-(sample) and the first 1:(n-1) columns are observations and the nth column is a
-label assignment in the form of a factor. Names for the data points should be
-supplied in \code{rownames(data)} and names each column can be supplied in
+  \item{data}{A data frame with d columns and n rows. Each row is a variable
+and the first 1:(d-1) columns are observations and the nth column is a
+label assignment in the form of a factor. Names for the variables should be
+supplied in \code{rownames(data)}, and names for each column can be supplied in
 \code{colnames(data)} }
+  \item{useDensity}{Set transparancey of the plotted variables based on a
+density estimate of the distribution along the correlation sphere.}
+  \item{showProfile}{Show the parallel coordinates plot.}
+  \item{showPatch}{Show each variable as a greysacle patch image.}
+  \item{threshold}{Variables with variance below the threshold are excluded.}
+  \item{coloring}{Alternate continuous values for each variable for coloring
+the data instead of using labels (switch by pressing c).}
   \item{perms}{Number of permutations for permutation test of projection. The
 permutation test computes the probability that there is a projection with more
 points with correlation r>a for a>=0 and r<a for a<=0 than the current shown
 projection.}
-  \item{n}{Number of top anti-/correlations to retrieve}
-  \item{indices}{Data point indices to retrieve names for or to highlight in the s-CorrPlot
-display} 
+  \item{v}{Vector with d-1 columns in order to set a new projection.}
+  \item{r}{Correlation coefficient to threshold which variables to output.}
+  \item{n}{Number of top anti-/correlations to retrieve.}
+  \item{indices}{Variable indices to retrieve the names of, likely in order
+to highlight them in the s-CorrPlot display.}
   \item{names}{Data point names to highlight in the s-CorrPlot display}
-  \item{threshold}{Data points with varance below threhold are excluded}
-  \item{coloring}{Alternate continuous values for rach data  point for coloring
-    the data instead of lables (swicth by pressing c)}
-  \item{useDensity}{Set transparancey based of plotted points based on a density
-    estimate of the distribution on the correlation sphere}
-   \item{showProfile}{Show parallel coordinates plot}
-  \item{showPatch}{Show data point as a greysacle patch image} 
+  \item{data2}{A data frame where rows correspond to variables. May include the
+final column as factor labels for automatic coloring but not required.}
+  \item{v2}{Both a primary and secondary vector for defining a static s-CorrPlot
+view. Can include labels from the rows or pipe in from the interactive display.}
 }
 \value{
-  For cor/acor the top n correlated/anti-correlated data points to the current
-first projection direction (left most point of the unit circle in the display).
-  All other return methods  nothing (NULL).
+  A vector in correlation space is returned for calling both primary/secondary.
+  All combinations of corr/acorr and cor/acor return a data frame with indices, correlation coefficients, and variable names for valid variables.
+  Calling size returns the number of variables or points on the display.
+  Calling selected returns the index of the primary variable of interest.
+  Calling density returns all the density estimate values used for the current
+  calculation of transparency in the view.
+  Calling name returns a list of names corresponding to the input indices.
+  All other methods return nothing (NULL).
 }
 
 \author{
-  Samuel Gerber
+  Samuel Gerber & Sean McKenna
 }
 \seealso{
 }
 \references{
-In preparation
+http://mckennapsean.com/projects/s-corrplot/
 }
 \examples{
 library(scorr)
@@ -238,4 +269,4 @@ scorr.close();
 
 
 }
-\keyword{nonparametric,models,nonlinear}
+\keyword{multivariate,models,nonlinear,nonparametric,iplot}
