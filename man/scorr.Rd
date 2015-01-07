@@ -228,7 +228,7 @@ rownames(data) = names
 
 # start up the s-CorrPlot interactive display
 # disable density estimation since random data is spread out
-scorr(data)
+scorr(data, alpha = 0.2)
 
 # get the number of variables or points on the screen
 scorr.get.size()
@@ -263,7 +263,7 @@ scorr.highlight.name(c("name-45", "name-101"))
 
 # create a static plot of our current view
 # must have called scorr() first in order to use the get functions!
-scorr.plot(data, scorr.get.primary(), scorr.get.secondary())
+scorr.plot(data, scorr.get.primary(), scorr.get.secondary(), 0.2)
 
 # before closing R, be sure to close the s-CorrPlot!
 # you can call the function below or just press 'q' in the tool
