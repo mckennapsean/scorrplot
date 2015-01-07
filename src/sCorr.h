@@ -11,7 +11,6 @@
 #include "DisplayElement.h"
 #include "ProjectionDEL.h"
 #include "DensityProjectionDEL.h"
-//#include "GMRADensityProjectionDEL.h"
 #include "PCADEL.h"
 #include "ProfileDEL.h"
 #include "TextDEL.h"
@@ -104,7 +103,6 @@ class sCorr : public Display{
 
  
       if(useDensity){
-        //GMRADensityProjectionDEL<TPrecision> *pd = new GMRADensityProjectionDEL<TPrecision>(data, animator, font);
         dpd = new DensityProjectionDEL<TPrecision>(data, animator, font, alpha);
         dpd->location(151, 10, 630, 630);
         elements.push_back(dpd);
@@ -190,13 +188,11 @@ class sCorr : public Display{
 
       std::cout << "Anywhere" << std::endl;
       std::cout << "------------------" << std::endl;
-      std::cout << "Press q to quit and return order list of correlated genes" << std::endl  << std::endl;
-      std::cout << "Press i to search for genes in the file search.txt in the current working directory" << std::endl  << std::endl;
-      std::cout << "Press o to ouput the 20 most correlated genes in cor.txt and the 20 most anti-correlated genes in acor.txt in the current working directory" << std::endl  << std::endl;
+      std::cout << "Press q to quit and return order list of correlated variables" << std::endl  << std::endl;
 
       std::cout << "Projection Display" << std::endl;
       std::cout << "------------------" << std::endl;
-      std::cout << "Click on point to select current set of genes as active (shown in text list when mouse pointer is not in projection display)" << std::endl;
+      std::cout << "Click on point to select current set of variables as active (shown in text list when mouse pointer is not in projection display)" << std::endl;
       std::cout << "Shift click to add to profile display" << std::endl;
       std::cout << "Up and down arrow to increase / decrease point size" << std::endl ; 
       std::cout << "Left and right arrow to adjust transparency" << std::endl ; 
@@ -210,29 +206,20 @@ class sCorr : public Display{
       std::cout << "Press < to decrease bandwidth for density" << std::endl << std::endl;
 
 
-
-
-      std::cout << "Profile Display" << std::endl;
-      std::cout << "--------------" << std::endl;
-      std::cout << "Hover and click (ctrl) click to color/align by coordinates" << std::endl;
-      std::cout << "Press 1,2,3 to color by clicked, ctrl clicked or labels" << std::endl; 
-      std::cout << "Press c to clear selected profiles" << std::endl  << std::endl;
-
-
       std::cout << "PCA Display" << std::endl;
       std::cout << "-----------" << std::endl;
-      std::cout << "Click on bar to align primary direction to principal component" << std::endl;
-      std::cout << "Ctrl click to align secondary direction" << std::endl  << std::endl;
+      std::cout << "Click on bar to align primary variable of interest to principal component" << std::endl;
+      std::cout << "Right click to align secondary variable of interest" << std::endl  << std::endl;
 
       std::cout << "Label Display" << std::endl;
       std::cout << "-------------" << std::endl;
-      std::cout << "Click to highlight label" << std::endl << std::endl;
+      std::cout << "Click or hover to highlight all points within a label" << std::endl << std::endl;
 
       std::cout << "Text Display" << std::endl;
       std::cout << "-------------" << std::endl;
-      std::cout << "Click to align first axis of projection" << std::endl << std::endl;
-      std::cout << "Ctrl click to align second axis of projection" << std::endl << std::endl;
-      std::cout << "Shift click to add to selected profiles" << std::endl << std::endl;
+      std::cout << "Click to align a point as a primary variable of interest for the projection" << std::endl << std::endl;
+      std::cout << "Right click a point as a secondary variable of interest for the projection" << std::endl << std::endl;
+      std::cout << "Shift click to add a variable to the selected profiles" << std::endl << std::endl;
     };
 
 
