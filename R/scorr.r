@@ -1,9 +1,9 @@
 
 
 
-scorr <- function (data, useDensity = T, showProfile = T, showPatch = F, threshold = 0, coloring = 1 : nrow(data), perms = 0){
+scorr <- function (data, alpha = 0.1, useDensity = T, showProfile = T, showPatch = F, threshold = 0, coloring = 1 : nrow(data), perms = 0){
 
-  nc <- ncol(data)  
+  nc <- ncol(data)
 
   v <- apply(data[,1:(nc-1)], 1, "var")
   if(sum(v==0) > 0){
@@ -23,7 +23,7 @@ scorr <- function (data, useDensity = T, showProfile = T, showPatch = F, thresho
                       as.integer(as.numeric(l)-1), as.character(lnames), 
                       as.integer(perms), as.numeric(coloring),
                       as.integer(useDensity), as.integer(showProfile),
-                      as.integer(showPatch) )
+                      as.integer(showPatch), as.double(alpha))
    invisible(data)
 }
 

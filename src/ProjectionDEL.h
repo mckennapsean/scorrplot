@@ -55,12 +55,12 @@ class ProjectionDEL : public DisplayElement{
     SquaredEuclideanMetric<TPrecision> sL2;
   public:
 
-    ProjectionDEL(Data<TPrecision> &d, Animator &a, Font &f) 
+    ProjectionDEL(Data<TPrecision> &d, Animator &a, Font &f, float &al) 
       : data(d), Rone(d, Rotation<TPrecision>::Primary),
       Rtwo(d,Rotation<TPrecision>::Secondary), animator(a), font(f){ 
         pickW = 5;
         pickH = 5;
-        alpha = 0.1;
+        alpha = al;
         pointSize = 6;
       };
 

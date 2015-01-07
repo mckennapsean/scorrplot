@@ -6,6 +6,7 @@ scorr.plot <- function(
     data,
     primary,
     secondary,
+    alpha = 0.1,
     ...){
   
   # load dependencies for plotting
@@ -24,7 +25,8 @@ scorr.plot <- function(
   ylab = ""
   bty = "n"
   pch = 19
-  col = "#00000050"
+  col = "#000000"
+  col = paste(col, as.hexmode(as.integer(alpha * 255)), sep = "")
   
   # check input data for labels (factor type)
   # if present, these are used to color the variables
@@ -33,7 +35,6 @@ scorr.plot <- function(
   names(last.column.type) = NULL
   labels.exist = last.column.type == "factor"
   if(labels.exist){
-    alpha = 0.5
     bg = "white"
     colors = brewer.pal("Set1", n = 9)
     cols = paste(colors, as.hexmode(as.integer(alpha * 255)), sep = "")

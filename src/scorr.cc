@@ -375,7 +375,7 @@ void printHelp(){
 
 
 SEXP scorr(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
-    Rcolors, SEXP RuseDensity, SEXP RshowProfile, SEXP RshowPatch) {
+    Rcolors, SEXP RuseDensity, SEXP RshowProfile, SEXP RshowPatch, SEXP Ralpha) {
       using namespace FortranLinalg;
   m = *INTEGER(Rm);
 
@@ -453,6 +453,7 @@ SEXP scorr(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
     bool useDensity = *INTEGER(RuseDensity);
     bool showProfile = *INTEGER(RshowProfile);
     bool showPatch = *INTEGER(RshowPatch);
+    float alpha = *REAL(Ralpha);
 
     std::vector<std::string> cnames;
     for(int i=0; i<m; i++){
@@ -508,7 +509,7 @@ SEXP scorr(SEXP Rm, SEXP Rn, SEXP Rx, SEXP Rl, SEXP Rln, SEXP Rperms, SEXP
     glutKeyboardFunc(keyboard1);
     glutSpecialFunc(special1);
 
-    D_projection->init(useDensity, showProfile, showPatch);
+    D_projection->init(useDensity, showProfile, showPatch, alpha);
 
     glutShowWindow();
     glutMainLoop(); 

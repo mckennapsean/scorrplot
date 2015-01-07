@@ -63,13 +63,13 @@ class DensityProjectionDEL : public DisplayElement{
 
   public:
 
-    DensityProjectionDEL(Data<TPrecision> &d, Animator &a, Font &f) 
+    DensityProjectionDEL(Data<TPrecision> &d, Animator &a, Font &f, float &al) 
       : data(d), Rone(d, Rotation<TPrecision>::Primary),
       Rtwo(d,Rotation<TPrecision>::Secondary), animator(a), font(f){ 
       using namespace FortranLinalg;
         pickW = 5;
         pickH = 5;
-        alpha = 0.1;
+        alpha = al;
         pointSize = 6;
 
         //compute density

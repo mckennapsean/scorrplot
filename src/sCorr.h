@@ -92,7 +92,7 @@ class sCorr : public Display{
 
 
     void setupDisplay(bool useDensity = true, bool showProfile = true, bool
-        showPatch = false){
+        showPatch = false, float alpha = 0.1){
       //setup display elements
 
       for(std::list<DisplayElement *>::iterator it = elements.begin(); it !=
@@ -105,12 +105,12 @@ class sCorr : public Display{
  
       if(useDensity){
         //GMRADensityProjectionDEL<TPrecision> *pd = new GMRADensityProjectionDEL<TPrecision>(data, animator, font);
-        dpd = new DensityProjectionDEL<TPrecision>(data, animator, font);
+        dpd = new DensityProjectionDEL<TPrecision>(data, animator, font, alpha);
         dpd->location(151, 10, 630, 630);
         elements.push_back(dpd);
       }
       else{
-        ProjectionDEL<TPrecision> *pd = new ProjectionDEL<TPrecision>(data, animator, font);
+        ProjectionDEL<TPrecision> *pd = new ProjectionDEL<TPrecision>(data, animator, font, alpha);
         pd->location(151, 10, 630, 630);
         elements.push_back(pd);
       }
@@ -165,10 +165,10 @@ class sCorr : public Display{
 
 
     void init(){
-      init(true, true, false);
+      init(true, true, false, 0.1);
     };
 
-    void init(bool useDensity, bool showProfile, bool showPatch) {  
+    void init(bool useDensity, bool showProfile, bool showPatch, float alpha) {  
       glClearColor(0.15, 0.15, 0.15, 0);
       glEnable(GL_POLYGON_SMOOTH);
       glEnable(GL_LINE_SMOOTH);
@@ -180,7 +180,7 @@ class sCorr : public Display{
 
       glutSetCursor(GLUT_CURSOR_CROSSHAIR);
 
-      setupDisplay(useDensity, showProfile, showPatch); 
+      setupDisplay(useDensity, showProfile, showPatch, alpha); 
 
     };
 
