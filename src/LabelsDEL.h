@@ -117,7 +117,7 @@ class LabelsDEL : public DisplayElement{
      if( !isInside(x, y) ) {  return; }
     
      if(selectedIndex != -1){
-        glColor4f(0.8, 0.8, 0.8, 1);
+        glColor4f(0.4, 0.4, 0.4, 1);
         font.setSize(15);
 	font.renderString(data.labelnames[selectedIndex], xM, yM, 0); 
       } 
