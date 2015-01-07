@@ -33,7 +33,7 @@ Once installed, the R-package *scorr* includes datasets and demos to help you. B
 - **subwayStops** : subway stop ridership in different regions of NYC
 - **subwayTime** : subway ridership across the years in NYC
 
-Then, for any demo name above:
+Then, for any demo name above, you *must open a terminal window* and type:
 
     R
     library(scorr)
@@ -54,7 +54,7 @@ There are also various keyboard commands within the tool, such as left and right
 System Requirements
 -------------------
 
-The **s-CorrPlot** is integrated within the R statistical framework for data input and output, but the interactive tool is largely written in C++ and OpenGL. It has been tested on Mac OS X and Linux.
+The **s-CorrPlot** is integrated within the R statistical framework for data input and output, but the interactive tool is largely written in C++ and OpenGL. It has been tested on Mac OS X and Linux and will only run from a terminal window.
 
 To compile the *scorr* R-package, you need the following components:
 
@@ -69,7 +69,7 @@ Development
 
 To contribute to package development, please ensure you have a development environment that compiles the package. Then, download the code from GitHub into your own local folder.
 
-Once you have entered that local folder in your terminal, simply enter the following commands to re-compile and test the package with any edits you make to the source:
+Once you have entered that local folder in your terminal, simply enter the following commands from terminal to re-compile and test the package with any edits you make to the source:
 
     R
     devtools::load_all()
