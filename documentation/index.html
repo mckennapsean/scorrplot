@@ -86,10 +86,11 @@
 <h2 id="commands"><em>scorr</em> Commands</h2>
 
 <ul>
-  <li><p>scorr(data, useDensity = T, showProfile = T, showPatch = F, threshold = 0, coloring = 1 : nrows(data), perms = 0)</p>
+  <li><p>scorr(data, alpha = 0.1, useDensity = T, showProfile = T, showPatch = F, threshold = 0, coloring = 1 : nrows(data), perms = 0)</p>
     <ul>
       <li><p>data: A data frame with d columns and n rows. Each row is a variable and the first 1:(d-1) columns are observations and the nth column is a label assignment in the form of a factor. Names for the variables should be supplied in <em>rownames(data)</em>, and names for each column can be supplied in <em>colnames(data)</em></p></li>
-      <li><p>useDensity: Set transparancey of the plotted variables based on a density estimate of the distribution along the correlation sphere.</p></li>
+      <li><p>alpha: Set the initial transparency of points.</p></li>
+      <li><p>useDensity: Set transparency of the plotted variables based on a density estimate of the distribution along the correlation sphere.</p></li>
       <li><p>showProfile: Show the parallel coordinates plot.</p></li>
       <li><p>showPatch: Show each variable as a greysacle patch image.</p></li>
       <li><p>threshold: Variables with variance below the threshold are excluded.</p></li>
@@ -172,10 +173,11 @@
       <li><p>close <em>scorr</em></p></li>
     </ul>
   </li>
-  <li><p>scorr.plot(data2, v2, v2)</p>
+  <li><p>scorr.plot(data2, v2, v2, alpha = 0.1)</p>
     <ul>
       <li><p>data2: A data frame where rows correspond to variables. May include the final column as factor labels for automatic coloring but not required.</p></li>
       <li><p>v2: Both a primary and secondary vector for defining a static s-CorrPlot view. Can include labels from the rows or pipe in from the interactive display.</p></li>
+      <li><p>alpha: Set the initial transparency of points.</p></li>
     </ul>
   </li>
 </ul>
@@ -238,7 +240,7 @@ scorr.highlight.name(c(&quot;name-45&quot;, &quot;name-101&quot;))
 
 # create a static plot of our current view
 # must have called scorr() first in order to use the get functions!
-scorr.plot(data, scorr.get.primary(), scorr.get.secondary())
+scorr.plot(data, scorr.get.primary(), scorr.get.secondary(), 0.2)
 
 # before closing R, be sure to close the s-CorrPlot!
 # you can call the function below or just press &#39;q&#39; in the tool
