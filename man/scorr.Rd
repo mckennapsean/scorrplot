@@ -133,6 +133,7 @@ since they are unable to compile the tool.
 
 \usage{
   scorr(data,
+        alpha = 0.1,
         useDensity = T,
         showProfile = T,
         showPatch = F,
@@ -155,7 +156,7 @@ since they are unable to compile the tool.
   scorr.highlight.index(indices)
   scorr.highlight.name(names)
   scorr.close()
-  scorr.plot(data2, v2, v2)
+  scorr.plot(data2, v2, v2, alpha = 0.1)
 }
 
 \arguments{
@@ -164,7 +165,8 @@ and the first 1:(d-1) columns are observations and the nth column is a
 label assignment in the form of a factor. Names for the variables should be
 supplied in \code{rownames(data)}, and names for each column can be supplied in
 \code{colnames(data)} }
-  \item{useDensity}{Set transparancey of the plotted variables based on a
+  \item{alpha}{Set the initial transparency of points.}
+  \item{useDensity}{Set transparency of the plotted variables based on a
 density estimate of the distribution along the correlation sphere.}
   \item{showProfile}{Show the parallel coordinates plot.}
   \item{showPatch}{Show each variable as a greysacle patch image.}
