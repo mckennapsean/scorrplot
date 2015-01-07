@@ -1,2 +1,2 @@
 data(gene1)
-data = scorr(data, useDensity = T)
+data = scorr(data, useDensity = F)
