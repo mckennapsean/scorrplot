@@ -98,6 +98,11 @@ class ProjectionDEL : public DisplayElement{
 
       glMatrixMode(GL_MODELVIEW); 	
       glLoadIdentity();
+      
+      // draw background plot first
+      glCallList(circleDL);
+      //glCallList(linesDL);
+      drawLines();
 
       //glPushName(-1); 
       glPointSize(pointSize);
@@ -178,10 +183,6 @@ class ProjectionDEL : public DisplayElement{
          }
          glEnd();
        */
-
-      glCallList(circleDL);
-      //glCallList(linesDL);
-      drawLines();
 
 
       if(isInside(xM, yM)){
