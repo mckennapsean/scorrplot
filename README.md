@@ -60,7 +60,7 @@ To compile the *scorr* R-package, you need the following components:
 
 -  **R** ([version 2.10 or newer](http://www.r-project.org/)) + [devtools](https://github.com/hadley/devtools)
 -  **Xcode** (for *Mac*, [install Xcode](https://developer.apple.com/xcode/) and [download command line tools](https://developer.apple.com/support/xcode/))
--  **OpenGL** (for *Linux*, OpenGL library [like freeglut](http://freeglut.sourceforge.net/))
+-  **OpenGL + GLUT** (for *Linux*, GLUT library [like freeglut](http://freeglut.sourceforge.net/))
 
 
 
