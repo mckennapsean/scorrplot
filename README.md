@@ -77,7 +77,7 @@ Once you have entered that local folder in your terminal, simply enter the follo
 Then, you can test out the *scorr* tool inside R, such as:
 
     data(gene1)
-    scorr(gene1)
+    scorr(data)
 
 Feel free to submit any issues or pull requests you have to us!
 
