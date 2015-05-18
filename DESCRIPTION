@@ -3,7 +3,7 @@ Title: s-CorrPlot: Visualizing Correlation
 Version: 1.0
 Authors@R: as.person(c(
     "Sean McKenna <sean@cs.utah.edu> [cre, ctb]",
-    "Samuel Gerber <sgerber@cs.utah.edu> [cre, aut]"
+    "Samuel Gerber <sgerber@cs.utah.edu> [aut]"
     ))
 Description: The s-CorrPlot is an interactive scatterplot for visually exploring
     pairwise correlation coefficients between variables in large datasets.
