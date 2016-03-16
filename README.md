@@ -104,9 +104,9 @@ Authors
 -------
 
 - [Sean McKenna](http://mckennapsean.com/)
-- [Samuel Gerber](http://www.math.duke.edu/~sgerber/)
+- [Samuel Gerber](http://pages.uoregon.edu/sgerber/)
 
-The *scorr* package was originally developed as the tool *gyroscope*, written by [Samuel Gerber](http://www.math.duke.edu/~sgerber/).
+The *scorr* package was originally developed as the tool *gyroscope*, written by [Samuel Gerber](http://pages.uoregon.edu/sgerber/).
 
 
 
