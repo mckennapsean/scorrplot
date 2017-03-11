@@ -53,4 +53,10 @@ d3.csv('data/test.csv', (e, d) => {
   // select primary & secondary points of interest
   let ppoi = 0
   let spoi = 1
+
+  // compute initial projection
+
+  // select new primary point
+
+  // interpolate projections
 })
