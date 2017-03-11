@@ -38,14 +38,15 @@ d3.csv('data/test.csv', (e, d) => {
     }
     // compute length
     let length = 0
-    for (let j = 0; j < vectors[0].length; j++) {
-      length += vectors[i][j] * vectors[i][j]
+    for (let j = 0; j < svectors[0].length; j++) {
+      length += svectors[i][j] * svectors[i][j]
     }
     length = Math.sqrt(length)
     // scale length to 1
-    for (let j = 0; j < vectors[0].length; j++) {
+    for (let j = 0; j < svectors[0].length; j++) {
       svectors[i][j] = svectors[i][j] / length
     }
+    length = 0
   }
   console.log('data standardized')
 
