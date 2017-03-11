@@ -1,9 +1,9 @@
+// global variables for testing
 var dataset
 var vectors = []
 
 d3.csv('data/test.csv', (e, d) => {
   console.log('data loaded')
-  // console.log(d)
 
   // store data in browser
   dataset = d
@@ -19,4 +19,12 @@ d3.csv('data/test.csv', (e, d) => {
     }
     vectors[row] = vector
   }
+  console.log('vectors computed')
+
+  // standardize vectors (mean-centered, scaled)
+  console.log('data standardized')
+
+  // select primary & secondary points of interest
+  let ppoi = 0
+  let spoi = 1
 })
