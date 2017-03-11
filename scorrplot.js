@@ -16,7 +16,7 @@ d3.csv('data/test.csv', (e, d) => {
   for (let row in dataset) {
     let vector = []
     for (let i = 0; i < dimensions; i++) {
-      vector[i] = dataset[row]['X' + (i + 1)]
+      vector[i] = parseFloat(dataset[row]['X' + (i + 1)])
     }
     vectors[row] = vector
   }
@@ -36,8 +36,16 @@ d3.csv('data/test.csv', (e, d) => {
     for (let j = 0; j < vectors[0].length; j++) {
       svectors[i][j] = vectors[i][j] - mean
     }
+    // compute length
+    let length = 0
+    for (let j = 0; j < vectors[0].length; j++) {
+      length += vectors[i][j] * vectors[i][j]
+    }
+    length = Math.sqrt(length)
     // scale length to 1
-    for (let j = 0; j < vectors[0].length; j++) {}
+    for (let j = 0; j < vectors[0].length; j++) {
+      svectors[i][j] = svectors[i][j] / length
+    }
   }
   console.log('data standardized')
 
