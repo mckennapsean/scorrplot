@@ -24,6 +24,8 @@ d3.csv('data/test.csv', (e, d) => {
 
   // standardize vectors (mean-centered, scaled)
   for (let i = 0; i < vectors.length; i++) {
+    // initialize standardized vector
+    svectors[i] = []
     // compute mean
     let mean = 0
     for (let j = 0; j < vectors[0].length; j++) {
@@ -32,7 +34,7 @@ d3.csv('data/test.csv', (e, d) => {
     mean = mean / vectors[0].length
     // subtract mean
     for (let j = 0; j < vectors[0].length; j++) {
-      svectors[i][j] = vector[i][j] - mean;
+      svectors[i][j] = vectors[i][j] - mean
     }
     // scale length to 1
     for (let j = 0; j < vectors[0].length; j++) {}
