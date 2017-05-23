@@ -1,7 +1,7 @@
 // global variables for testing
 var dataset
 var vectors = []
-var svectors = []
+var standardizedVectors = []
 
 d3.csv('data/test.csv', (e, d) => {
   console.log('data loaded')
@@ -25,7 +25,7 @@ d3.csv('data/test.csv', (e, d) => {
   // standardize vectors (mean-centered, scaled)
   for (let i = 0; i < vectors.length; i++) {
     // initialize standardized vector
-    svectors[i] = []
+    standardizedVectors[i] = []
     // compute mean
     let mean = 0
     for (let j = 0; j < vectors[0].length; j++) {
@@ -34,25 +34,25 @@ d3.csv('data/test.csv', (e, d) => {
     mean = mean / vectors[0].length
     // subtract mean
     for (let j = 0; j < vectors[0].length; j++) {
-      svectors[i][j] = vectors[i][j] - mean
+      standardizedVectors[i][j] = vectors[i][j] - mean
     }
     // compute length
     let length = 0
-    for (let j = 0; j < svectors[0].length; j++) {
-      length += svectors[i][j] * svectors[i][j]
+    for (let j = 0; j < standardizedVectors[0].length; j++) {
+      length += standardizedVectors[i][j] * standardizedVectors[i][j]
     }
     length = Math.sqrt(length)
     // scale length to 1
-    for (let j = 0; j < svectors[0].length; j++) {
-      svectors[i][j] = svectors[i][j] / length
+    for (let j = 0; j < standardizedVectors[0].length; j++) {
+      standardizedVectors[i][j] = standardizedVectors[i][j] / length
     }
     length = 0
   }
   console.log('data standardized')
 
   // select primary & secondary points of interest
-  let ppoi = 0
-  let spoi = 1
+  let primaryVector = 0
+  let secondaryVector = 1
 
   // compute initial projection
 
