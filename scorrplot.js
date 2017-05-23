@@ -65,8 +65,9 @@ d3.csv('data/test.csv', (e, d) => {
   let secondaryVectorProjectionLength = 0
   for (let j = 0; j < vectors[0].length; j++) {
     secondaryVectorProjection[j] = standardizedVectors[secondaryVector][j] - dotProduct * standardizedVectors[primaryVector][j]
-    secondaryVectorProjectionLength += secondaryVectorProjection[j]
+    secondaryVectorProjectionLength += secondaryVectorProjection[j] * secondaryVectorProjection[j]
   }
+  secondaryVectorProjectionLength = Math.sqrt(secondaryVectorProjectionLength)
   // standardize projection vector
   for (let j = 0; j < vectors[0].length; j++) {
     secondaryVectorProjection[j] /= secondaryVectorProjectionLength
@@ -84,6 +85,7 @@ d3.csv('data/test.csv', (e, d) => {
       currentProjection[1] += standardizedVectors[i][j] * secondaryVectorProjection[j]
     }
     projection[i] = currentProjection
+    // ERROR currently projection incorrect for primary & secondary vector!
   }
   console.log('projected vectors')
 
