@@ -72,7 +72,7 @@ d3.csv('data/test.csv', (e, d) => {
   for (let j = 0; j < vectors[0].length; j++) {
     secondaryVectorProjection[j] /= secondaryVectorProjectionLength
   }
-  console.log('secondary projection vector calculated')
+  console.log('calculated new plane')
 
   // compute initial projection
   let projection = []
@@ -84,8 +84,18 @@ d3.csv('data/test.csv', (e, d) => {
       currentProjection[0] += standardizedVectors[i][j] * standardizedVectors[primaryVector][j]
       currentProjection[1] += standardizedVectors[i][j] * secondaryVectorProjection[j]
     }
+    // update primary vector to be aligned exactly on the far right
+    if (i === primaryVector) {
+      currentProjection[0] = 1
+      currentProjection[1] = 0
+    // update secondary vector to map to outer edge of projected circle
+    } else if (i === secondaryVector) {
+      let currentX = currentProjection[0]
+      let newY = Math.sqrt(1 - currentX * currentX)
+      currentProjection[1] = newY
+    }
+    // save the vector projection
     projection[i] = currentProjection
-    // ERROR currently projection incorrect for primary & secondary vector!
   }
   console.log('projected vectors')
 
