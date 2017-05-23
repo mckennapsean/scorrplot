@@ -55,6 +55,20 @@ d3.csv('data/test.csv', (e, d) => {
   let secondaryVector = 1
 
   // compute initial projection
+  let projection = []
+  // for each vector, insert into projection the [x,y] coordinate as list
+  for (let i = 0; i < vectors.length; i++) {
+    let currentProjection = [0, 0]
+    // compute the dot-product of each vector for x and linear combination for y
+    for (let j = 0; j < vectors[0].length; j++) {
+      currentProjection[0] += standardizedVectors[i][j] * standardizedVectors[primaryVector][j]
+      currentProjection[1] += standardizedVectors[i][j] * standardizedVectors[secondaryVector][j] // not right yet
+    }
+    projection[i] = currentProjection
+  }
+  console.log('projected vectors')
+
+  // visualize projection
 
   // select new primary point
 
