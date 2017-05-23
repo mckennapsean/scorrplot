@@ -54,6 +54,25 @@ d3.csv('data/test.csv', (e, d) => {
   let primaryVector = 0
   let secondaryVector = 1
 
+  // calculate secondary projection vector
+  let secondaryVectorProjection = []
+  // dot product of primary & secondary
+  let dotProduct = 0
+  for (let j = 0; j < vectors[0].length; j++) {
+    dotProduct += standardizedVectors[secondaryVector][j] * standardizedVectors[primaryVector][j]
+  }
+  // compute projection vector (y)
+  let secondaryVectorProjectionLength = 0
+  for (let j = 0; j < vectors[0].length; j++) {
+    secondaryVectorProjection[j] = standardizedVectors[secondaryVector][j] - dotProduct * standardizedVectors[primaryVector][j]
+    secondaryVectorProjectionLength += secondaryVectorProjection[j]
+  }
+  // standardize projection vector
+  for (let j = 0; j < vectors[0].length; j++) {
+    secondaryVectorProjection[j] /= secondaryVectorProjectionLength
+  }
+  console.log('secondary projection vector calculated')
+
   // compute initial projection
   let projection = []
   // for each vector, insert into projection the [x,y] coordinate as list
@@ -62,7 +81,7 @@ d3.csv('data/test.csv', (e, d) => {
     // compute the dot-product of each vector for x and linear combination for y
     for (let j = 0; j < vectors[0].length; j++) {
       currentProjection[0] += standardizedVectors[i][j] * standardizedVectors[primaryVector][j]
-      currentProjection[1] += standardizedVectors[i][j] * standardizedVectors[secondaryVector][j] // not right yet
+      currentProjection[1] += standardizedVectors[i][j] * secondaryVectorProjection[j]
     }
     projection[i] = currentProjection
   }
