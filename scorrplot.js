@@ -2,6 +2,7 @@
 var dataset
 var vectors = []
 var standardizedVectors = []
+var projection = []
 
 d3.csv('data/test.csv', (e, d) => {
   console.log('data loaded')
@@ -75,7 +76,6 @@ d3.csv('data/test.csv', (e, d) => {
   console.log('calculated new plane')
 
   // compute initial projection
-  let projection = []
   // for each vector, insert into projection the [x,y] coordinate as list
   for (let i = 0; i < vectors.length; i++) {
     let currentProjection = [0, 0]
@@ -98,6 +98,13 @@ d3.csv('data/test.csv', (e, d) => {
     projection[i] = currentProjection
   }
   console.log('projected vectors')
+
+  // initialize svg and plot elements
+  // 200 x 200 grid to easily support scaling of strokes
+  let plot = d3.select('.content').append('svg').attr('viewBox', '-100 -100 200 200')
+  let scorrplot = plot.append('g').attr('class', 'scorrplot')
+  scorrplot.append('circle').attr('r', 100).attr('class', 'border')
+  scorrplot.append('g').attr('class', 'points')
 
   // visualize projection
 
