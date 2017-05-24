@@ -105,8 +105,15 @@ d3.csv('data/test.csv', (e, d) => {
   let scorrplot = plot.append('g').attr('class', 'scorrplot')
   scorrplot.append('circle').attr('r', 100).attr('class', 'border')
   scorrplot.append('g').attr('class', 'points')
+  console.log('drew base plot')
 
   // visualize projection
+  for (let i = 0; i < vectors.length; i++) {
+    let posX = projection[i][0] * 100
+    let posY = -projection[i][1] * 100
+    d3.select('.points').append('circle').attr('cx', posX).attr('cy', posY).attr('r', 0.5)
+  }
+  console.log('generated scorrplot')
 
   // select new primary point
 
